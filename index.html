@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Produtos</title>
+<style>
+body{
+font-family: Arial, sans-serif;
+font-size:1.25rem !important;
+background:#f8f9fa;
+padding:20px;
+}
+
+.toolbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+gap:10px;
+}
+
+.leftControls{
+display:flex;
+gap:10px;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.rightControls{
+display:flex;
+gap:8px;
+align-items:center;
+}
+
+.product{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#6c757d;
+padding:12px 15px;
+margin-bottom:10px;
+border-radius:6px;
+border-bottom:solid #fd7e14 3px;
+color:white;
+}
+
+.product.done{
+background:#4f5b66;
+text-decoration:line-through;
+color:#d4ffd9;
+}
+
+button,.mark-btn,.delete-btn{
+padding:6px 10px;
+border:none;
+border-radius:4px;
+cursor:pointer;
+margin-left:5px;
+font-weight:bold;
+}
+
+button{
+background:#fd7e14;
+color:white;
+}
+
+.mark-btn{
+background:#fd7e14;
+color:white;
+}
+
+.mark-btn.done{
+background:#28a745;
+}
+
+.delete-btn{
+background:#fd7e14;
+color:white;
+}
+
+.statsBox{
+background:#6c757d;
+color:white;
+padding:6px 12px;
+border-radius:6px;
+border-bottom:solid #fd7e14 3px;
+}
+
+input{
+padding:6px;
+width:220px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+.switch{display:flex;align-items:center;gap:8px;margin-left:10px;}
+.switch input{display:none;}
+.toggle{width:50px;height:26px;background:#ccc;border-radius:30px;position:relative;cursor:pointer;transition:0.3s;}
+.toggle::before{content:"";position:absolute;width:22px;height:22px;background:white;border-radius:50%;top:2px;left:2px;transition:0.3s;}
+.switch input:checked + .toggle{background:#fd7e14;}
+.switch input:checked + .toggle::before{transform:translateX(24px);}
+
+.switch input{
+transform:scale(1.2);
+cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+
+<div class="leftControls">
+<input type="text" id="newProduct" placeholder="Adicionar produto">
+<button id="addBtn">Adicionar</button>
+
+<label class="switch">
+<input type="checkbox" id="autoMarkToggle">
+<div class="toggle"></div>
+</label>
+
+</div>
+
+<div class="rightControls">
+<button id="undoBtn">⬅</button>
+<button id="redoBtn">➡</button>
+<button id="clearAllBtn">Apagar tudo</button>
+<div id="statsBox" class="statsBox">Produtos feitos: 0/0</div>
+</div>
+
+</div>
+
+<div id="productList"></div>
+
+<script>
+
+const defaultProducts = [
+"GADGET0514","DIVE0666","MESAGM056","MOCH0067","MOCH0077","MOCH0078","MOCH0079",
+"GADGET0881","DIVE1112","DIVE1229","DIVE1190","SUPOR560","GADGET0671","GADGET0630",
+"GADGET0632","CAMIP202","GADGET0578","MOBIL052","GADGET0568","DIVE0873","DIVE0724",
+"DIVE0675","GADGET0427","DIVE0350","ADAPT061","ADAPT018","ADAPT069","CAMD694",
+"DIVE1312","DIVE0948","DIVE0864","DIVE0751","DIVE1255","DIVE1257","DIVE1253",
+"DIVE1260","DIVE1252","DIVE1262","DIVE1258","DIVE1250","DIVE1261","DIVE1254",
+"DIVE0847","DIVE0845","DIVE0808","DIVE0949","DIVE0844","COLU0688","COLU0694",
+"COLU0695","DIVE0614","DIVE0520","DIVE0521","SUPOR452","SUPOR478","SUPOR430",
+"SUPOR429","SUPOR223","SUPOR161","SUPOR118","SUPOR506","SUPOR351","SUPOR331",
+"SUPOR150","SUPOR181","SUPOR134","SUPOR367","SUPOR234","SUPOR419","SUPOR092",
+"SUPOR058","SUPOR439","SUPOR124","SUPOR422","SUPOR269","SUPOR059","SUPOR495",
+"SUPOR220","SUPOR344","SUPOR348","SUPOR332","SUPOR123","SUPOR494","SUPOR477",
+"SUPOR436","SUPOR423","SUPOR426","SUPOR424","SUPOR427","SUPOR420","SUPOR425",
+"SUPOR413","SUPOR346","SUPOR347","SUPOR334","SUPOR333","SUPOR317","SUPOR316",
+"SUPOR318","SUPOR278","SUPOR275","SUPOR250","SUPOR266","SUPOR242","SUPOR235",
+"SUPOR232","SUPOR224","SUPOR237","SUPOR238","SUPOR239","SUPOR226","SUPOR229",
+"SUPOR240","SUPOR218","SUPOR208","SUPOR195","SUPOR158","SUPOR096","SUPOR090",
+"SUPOR088","SUPOR094","SUPOR095","SUPOR083","SUPOR093","SUPOR076","SUPOR082",
+"ACEJ0661","ACEJ0652","CARRE480","CARRE396","ACEJ1085","ACEJ1084","ACEJ0558",
+"ACEJ0711","ACEJ0914","ACEJ0710","ACEJ0530","ACEJ0700","ACEJ0670","ACEJ1088",
+"ACEJ1120","ACEJ0682","ACEJ0678","GAV024","BATERIA155","BATERIA154","UPS0587",
+"UPS0305","UPS0451","UPS0421","UPS0378","UPS0591","UPS0518","UPS0406","UPS0400",
+"UPS0304","UPS0255","BATERIA002","BATERIA162","UPS0460","UPS0360","UPS0259",
+"UPS0419","UPS0529","UPS0466","UPS0453","ACREDE261","UPS0319","UPS0386","UPS0385",
+"UPS0384","UPS0298","UPS0299","UPS0382","UPS0381","UPS0413","UPS0346","BATERIA001",
+"UPS0598","UPS0578","UPS0565","UPS0553","UPS0562","UPS0520","UPS0521","UPS0531",
+"UPS0515","UPS0528","UPS0530","UPS0524","UPS0525","UPS0532","UPS0533","UPS0516",
+"UPS0522","UPS0523","BATERIA024","UPS0493","UPS0473","UPS0475","UPS0459","UPS0454",
+"UPS0457","UPS0452","UPS0425","UPS0431","UPS0427","UPS0436","UPS0426","UPS0438",
+"UPS0434","UPS0437","UPS0433","UPS0429","UPS0428","UPS0432","UPS0423","UPS0422",
+"UPS0412","UPS0411","UPS0403","UPS0405","UPS0394","UPS0396","UPS0402","UPS0397",
+"UPS0401","UPS0404","UPS0392","UPS0395","UPS0373","UPS0367","UPS0354","UPS0352",
+"UPS0353","UPS0347","UPS0343","UPS0344","UPS0345","UPS0342","UPS0329","UPS0340",
+"UPS0320","UPS0318","UPS0316","UPS0311","UPS0303","UPS0308","UPS0307","UPS0295",
+"UPS0285","UPS0291","MPAD471","MPAD470","MPAD433","MPAD369","MPAD468","MPAD390",
+"MPAD324","MPAD448","MPAD500","MPAD449","MPAD450","MPAD520","MPAD458","MPAD539",
+"MPAD540","MPAD453","MPAD546","MPAD341","MPAD547","MPAD532","MPAD537","MPAD530",
+"MPAD531","MPAD505","MPAD455","MPAD484","MPAD428","MPAD238","MPAD346","MPAD395",
+"MPAD578","MPAD345","MPAD396","MPAD514","MPAD511","CABO0437","CABO1731","CABO1698",
+"CABO1490","CABO1491","CABO1489","CABO1487","CABO1712","CABO0724","CABO1144",
+"CABO1238","CABO1226","CABO1214","CABO0912","CABO0813","CABO0668","CABO0718",
+"CABO1016","CABO0823","CABO1580","CABO1445","CABO1476","CABO1473","CABO1472",
+"CABO1474","CABO1477","CABO1475","CABO1013","CABO1015","CABO1014","CABO1456",
+"CABO1457","CABO1458","CABO0812","CABO0723","CABO0673","CABO0872","CABO0828",
+"CABO0796","CABO0665","CABO1471","CABO1465","CABO1449","CABO1469","CABO1468",
+"CABO1467","CABO1466","CABO1460","CABO1461","CABO1462","CABO1463","CABO1459",
+"CABO1464","CABO1454","CABO1453","CABO1470","CABO1450","CABO1451","CABO1452",
+"CABO0678","CABO1222","CABO1041","CABO1047","CABO1572","CABO0803","CABO0769",
+"CABO0693","CABO0690","CABO1064","CABO1063","CABO0933","CABO1168","CABO1156",
+"CABO0799","CABO0787","CABO1428","CABO1229","CABO1213","CABO1295","CABO1332",
+"CABO1350","CABO1338","CABO1312","CABO1198","CABO1317","CABO1289","CABO1196",
+"CABO1197","CABO1199","CABO1200","CABO1201","CABO1202","CABO1203","CABO1046",
+"CABO1043","CABO1040","CABO0932","CABO0357","CABO0319","CABO0320","CABO0281",
+"CABO1071","CABO1236","CABO1225","AK5021","CABO1155","CABO0705","CABO1062",
+"CABO1060","CABO0971","CABO1379","CABO0969","CABO0855","CABO1036","CABO1039",
+"CABO1042","CABO1045","CABO1083","CABO1082","CABO0972","CABO0905","CABO1140",
+"CABO1089","CABO0129","ADAPT133","ADAPT026","ADAPT129","CABO1298","CABO1300",
+"CABO0893","CABO0853","CABO1485","CABO1151","CABO0441","CABO1269","CABO1149",
+"CABO1128","CABO1113","CABO1112","CABO1110","CABO1399","CABO1398","CABO1397",
+"CABO0992","CABO0770","ACES1215","CABO0662","CABO1416","CABO1422","CABO1417",
+"CABO1421","CABO1420","CABO1418","CABO1419","CABO1352","CABO0903","CABO1044",
+"CABO1035","CABO1032","CABO0943","CABO0945","CABO0941","CABO0940","CABO0939",
+"CABO0938","CABO0937","ADAPT114","ADAPT077","CABO1385","CABO1235","CABO1165",
+"CABO1119","CABO1075","CABO0973","CABO0936","CABO0660","CABO1318","CABO1349",
+"CABO1292","CABO0530","CABO1309","CABO1353","CABO1322","CABO1315","CABO1303",
+"CABO1351","CABO1345","CABO1339","CABO1297","CABO1286","CABO1616","CABO1336",
+"CABO1330","CABO1348","CABO1316","CABO1310","CABO1304","CABO1288","CABO1287",
+"CABO1081","CABO1061","CABO1034","CABO0944","CABO1223","CABO1079","CABO0642",
+"CABO0430","CABO0661","CABO0891","CABO0669","CABO1735","CABO0998","CABO0996",
+"CABO0995","CABO0862","CABO0860","CABO0858","CABO0859","ADAPT049","ADAPT059",
+"CABO1120","CABO1139","CABO1455","CABO1411","CABO1415","CABO1410","CABO1414",
+"CABO1413","CABO1409","CABO1185","CABO1479","CABO1444","CABO1478","CABO1191",
+"CABO1190","CABO1189","CABO1188","CABO1187","CABO1186","CABO1184","CABO1183",
+"CABO1153","CABO1204","CABO1169","CABO1154","CABO1072","CABO0967","CABO1138",
+"CABO1068","CABO1162","CABO1163","CABO1161","CABO1160","CABO1065","CABO1066",
+"CABO1038","CABO0867","CABO0868","CABO0866","CABO0864","CABO1012","CABO1148",
+"CABO1076","CABO0504","CABO1206","CABO1392","CABO0801","CABO1118","CABO0920",
+"CABO1557","CABO1164","CABO0754","CABO0917","CABO0916","CABO0755","CABO1408",
+"CABO0722","CABO0667","CABO0349","CABO0743","CABO0202","CABO0316","CABO0201",
+"CABO0124","CABO0172","CABO0570","CABO0970","CABO0742","CABO0409","REDE0069",
+"CABO1109","CABO0404","CABO0276","CABO1152","CABO1037","CABO1033","CABO0736",
+"CABO0918","CABO0605","CABO0411","CABO0364","CABO0659","CABO1073","CABO1074",
+"CABO0913","CABO1181","CABO1176","CABO1175","CABO1174","CABO0741","CABO0697",
+"CABO0696","CABO0989","CABO0990","CABO0986","CABO0987","CABO0985","CABO0611",
+"CABO0984","CABO0982","CABO0981","CABO0432","CABO1448","CABO0317","CABO0278",
+"CABO1623","CABO1290","CABO1291","CABO1302","CABO1334","CABO1346","CABO1299",
+"CABO1321","CABO1729","CABO1730","CABO0085","CABO0266","ADAPT053","CABO0279",
+"CABO0716","CABO0442","CABO1634","ADAPT020","CABO0717","CABO1133","CABO0706",
+"CABO1493","ADAPT111","ADAPT099","CABO1127","CABO0925","CABO0721","CABO0875",
+"CABO0275","CABO0273","ADAPT128","ADAPT054","ACES1127","CABO1143","CABO0444",
+"CABO1147","ADAPT112","CABO1624","CABO1618","ADAPT103","CABO0274","CABO0991",
+"CABO1620","CABO1625","CABO1621","CABO1622","CABO1627","CABO1111","CABO1619",
+"ADAPT151","CABO0606","CABO0575","ADAPT150","CABO1114","CABO1125","CABO0436",
+"CABO0780","ADAPT110","CABO0964","CABO1048","CABO0963","CABO0870","CABO0956",
+"CABO1209","CABO0435","CABO0961","CABO0959","CABO0952","CABO0949","CABO0737",
+"CABO0954","CABO0946","CABO1031","CABO0950","CABO1107","CABO0720","CABO01060",
+"CABO1117","CABO1116","CABO0960","CABO0857","CABO0738","CABO0847","CABO1018",
+"CABO0856","ADAPT083","CABO0958","CABO0951","CABO0948","CABO1403","CABO0865",
+"CABO0739","CABO1129","CABO1108","CABO0921","CABO0651","CABO0861","ACES1012",
+"CABO0733","CABO0934","CABO0494","CABO0431","CABO0291","ADAPT090","CABO0410",
+"IB02625","CABO0928","CABO0957","CABO0825","CABO0826","CABO0824","CABO0633",
+"CABO0505","CABO0495","CABO0423","CABO0240"
+].map(code => ({code, done: false}));
+
+let products = JSON.parse(localStorage.getItem('products'));
+if (!products || products.length === 0) {
+  products = defaultProducts;
+}
+
+let autoMark = JSON.parse(localStorage.getItem('autoMark')) || false;
+let history=[];
+let redoHistory=[];
+
+const productList=document.getElementById('productList');
+const toggle=document.getElementById('autoMarkToggle');
+
+toggle.checked = autoMark;
+
+toggle.addEventListener('change',()=>{
+autoMark = toggle.checked;
+localStorage.setItem('autoMark',JSON.stringify(autoMark));
+});
+
+function saveState(){
+history.push(JSON.stringify(products));
+if(history.length>50)history.shift();
+redoHistory=[];
+}
+
+function saveProducts(){
+localStorage.setItem('products',JSON.stringify(products));
+}
+
+function updateStats(){
+const done=products.filter(p=>p.done).length;
+const total=products.length;
+document.getElementById('statsBox').textContent=`Produtos feitos: ${done}/${total}`;
+}
+
+function renderProducts(){
+productList.innerHTML='';
+
+products.forEach((item,index)=>{
+
+const div=document.createElement('div');
+div.className='product';
+if(item.done)div.classList.add('done');
+
+const span=document.createElement('span');
+span.textContent=item.code;
+
+const copyBtn=document.createElement('button');
+copyBtn.textContent='Copiar';
+
+copyBtn.onclick=()=>{
+saveState();
+navigator.clipboard.writeText(item.code);
+
+if(autoMark){
+item.done=true;
+}
+
+saveProducts();
+renderProducts();
+};
+
+const markBtn=document.createElement('button');
+markBtn.className='mark-btn';
+markBtn.textContent=item.done?'✓':'X';
+
+markBtn.onclick=()=>{
+saveState();
+item.done=!item.done;
+saveProducts();
+renderProducts();
+};
+
+const deleteBtn=document.createElement('button');
+deleteBtn.className='delete-btn';
+deleteBtn.textContent='X';
+
+deleteBtn.onclick=()=>{
+if(confirm(`Remover produto ${item.code}?`)){
+saveState();
+products.splice(index,1);
+saveProducts();
+renderProducts();
+}
+};
+
+
+div.appendChild(span);
+div.appendChild(copyBtn);
+div.appendChild(markBtn);
+div.appendChild(deleteBtn);
+
+productList.appendChild(div);
+
+});
+
+updateStats();
+}
+
+// adicionar produto
+
+document.getElementById('addBtn').onclick=()=>{
+const val=document.getElementById('newProduct').value.trim();
+
+if(val){
+saveState();
+products.push({code:val,done:false});
+saveProducts();
+renderProducts();
+document.getElementById('newProduct').value='';
+}
+};
+
+// apagar tudo
+
+document.getElementById('clearAllBtn').onclick=()=>{
+if(confirm('Tem certeza que deseja apagar TODOS os produtos?')){
+if(confirm('Confirma novamente apagar tudo?')){
+saveState();
+products=[];
+saveProducts();
+renderProducts();
+}
+}
+};
+
+// undo
+
+document.getElementById('undoBtn').onclick=()=>{
+if(history.length>0){
+redoHistory.push(JSON.stringify(products));
+products=JSON.parse(history.pop());
+saveProducts();
+renderProducts();
+}
+};
+
+// redo
+
+document.getElementById('redoBtn').onclick=()=>{
+if(redoHistory.length>0){
+history.push(JSON.stringify(products));
+products=JSON.parse(redoHistory.pop());
+saveProducts();
+renderProducts();
+}
+};
+
+// ENTER para adicionar
+
+document.getElementById('newProduct').addEventListener('keypress',function(e){
+if(e.key==='Enter'){
+document.getElementById('addBtn').click();
+}
+});
+
+renderProducts();
+
+</script>
+</body>
+</html>
