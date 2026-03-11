@@ -497,22 +497,55 @@ function updateAutoToggle() {
   document.getElementById('autoToggle').classList.toggle('on', autoMark);
 }
 
+// ── JSONBIN CONFIG ──
+const JSONBIN_API_KEY = '$2a$10$oOmEv.dZBvRCDigMzUr6w.Jf1LwKsD/ZYKG1jEzdV4EFgIr3uja.O';
+const JSONBIN_COLLECTION = '69b1676bc3097a1dd517aa4f';
+const JSONBIN_URL = 'https://api.jsonbin.io/v3/b';
+
 // ── SHARE ──
-// Encode the entire theme as base64 into a self-contained token (no server needed)
-document.getElementById('shareBtn').addEventListener('click', () => {
+document.getElementById('shareBtn').addEventListener('click', async () => {
   if (!activeThemeId) { notify('Seleciona um tema primeiro!', true); return; }
-  const theme = themes[activeThemeId];
-  const payload = JSON.stringify({ name: theme.name, products: theme.products });
-  const token = 'SH1_' + btoa(unescape(encodeURIComponent(payload)));
-  document.getElementById('shareIdBox').textContent = token;
-  document.getElementById('shareStatus').textContent = '';
+
+  const statusEl = document.getElementById('shareStatus');
+  const idBox = document.getElementById('shareIdBox');
+  idBox.textContent = '⏳ A gerar ID...';
+  statusEl.textContent = '';
   document.getElementById('shareModal').classList.add('open');
+
+  const theme = themes[activeThemeId];
+  const payload = { name: theme.name, products: theme.products };
+
+  try {
+    const res = await fetch(JSONBIN_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': JSONBIN_API_KEY,
+        'X-Bin-Private': 'false',
+        'X-Bin-Name': theme.name,
+        'X-Collection-Id': JSONBIN_COLLECTION
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) throw new Error('Erro ao criar bin: ' + res.status);
+    const data = await res.json();
+    const shortId = data.metadata.id;
+    idBox.textContent = shortId;
+    statusEl.textContent = '';
+  } catch(e) {
+    idBox.textContent = '❌ Erro ao gerar ID';
+    statusEl.textContent = e.message;
+    statusEl.style.color = 'var(--red)';
+  }
 });
 
 document.getElementById('shareIdBox').addEventListener('click', () => {
   const txt = document.getElementById('shareIdBox').textContent;
+  if (txt.startsWith('❌') || txt.startsWith('⏳')) return;
   navigator.clipboard.writeText(txt).then(() => {
     document.getElementById('shareStatus').textContent = '✓ Copiado!';
+    document.getElementById('shareStatus').style.color = 'var(--green)';
   });
 });
 
@@ -529,19 +562,26 @@ document.getElementById('importBtn').addEventListener('click', () => {
 document.getElementById('importClose').addEventListener('click', () => {
   document.getElementById('importModal').classList.remove('open');
 });
-document.getElementById('importConfirm').addEventListener('click', () => {
-  const token = document.getElementById('importIdInput').value.trim();
+document.getElementById('importConfirm').addEventListener('click', async () => {
+  const binId = document.getElementById('importIdInput').value.trim();
   const statusEl = document.getElementById('importStatus');
+  statusEl.style.color = 'var(--red)';
   statusEl.textContent = '';
-  if (!token) { statusEl.textContent = 'Cola um ID válido.'; return; }
+  if (!binId) { statusEl.textContent = 'Cola um ID válido.'; return; }
+
+  statusEl.style.color = 'var(--text2)';
+  statusEl.textContent = '⏳ A importar...';
+
   try {
-    if (!token.startsWith('SH1_')) throw new Error('Formato inválido');
-    const encoded = token.slice(4);
-    const decoded = decodeURIComponent(escape(atob(encoded)));
-    const data = JSON.parse(decoded);
+    const res = await fetch(`${JSONBIN_URL}/${binId}/latest`, {
+      headers: { 'X-Master-Key': JSONBIN_API_KEY }
+    });
+    if (!res.ok) throw new Error('ID não encontrado');
+    const json = await res.json();
+    const data = json.record;
+
     if (!data.name || !Array.isArray(data.products)) throw new Error('Dados inválidos');
 
-    // Reset done status on import (fresh start for colleague)
     const prods = data.products.map(p => ({ code: p.code, done: false }));
     const exists = Object.values(themes).some(t => t.name === data.name);
     const newName = exists ? data.name + ' (importado)' : data.name;
@@ -553,7 +593,8 @@ document.getElementById('importConfirm').addEventListener('click', () => {
     document.getElementById('importModal').classList.remove('open');
     notify('Tema importado: ' + newName);
   } catch(e) {
-    statusEl.textContent = '❌ ID inválido ou corrompido. Tenta novamente.';
+    statusEl.style.color = 'var(--red)';
+    statusEl.textContent = '❌ ' + e.message + '. Verifica o ID.';
   }
 });
 
