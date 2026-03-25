@@ -518,6 +518,25 @@ body { font-family: 'JetBrains Mono', monospace; background: var(--bg); color: v
 }
 .export-btn:hover { border-color: var(--accent); color: var(--accent); }
 
+/* Done date group labels */
+.section-label.done-label { color: var(--done-text); }
+
+/* Time badge on done products */
+.done-time {
+  font-size: 0.58rem; color: var(--text3); font-weight: 400;
+  margin-left: 8px; letter-spacing: 0;
+}
+
+/* Link filter buttons */
+.link-filter-btn {
+  width: 100%; text-align: left; padding: 10px 14px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 7px; cursor: pointer; font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem; color: var(--text2); transition: all 0.15s;
+}
+.link-filter-btn:hover { border-color: var(--text3); color: var(--text); }
+.link-filter-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); font-weight: 700; }
+
 /* Link modal */
 .link-preview {
   background: var(--bg); border: 1px solid var(--accent);
@@ -698,21 +717,49 @@ body { font-family: 'JetBrains Mono', monospace; background: var(--bg); color: v
 
 <!-- MODAL: Criar Link -->
 <div class="modal-overlay" id="createLinkModal">
-  <div class="modal">
+  <div class="modal" style="width:460px">
     <h2>🔗 Criar Link</h2>
-    <p>Escolhe um nome para o link. Só pode ter letras, números e hífens.</p>
-    <input type="text" class="modal-input" id="linkNameInput" placeholder="ex: lista-junho" maxlength="60"
-           pattern="[a-zA-Z0-9\-]+" spellcheck="false" autocomplete="off">
-    <p class="link-name-hint" id="linkNameHint"></p>
-    <div class="link-preview" id="linkPreview">
-      <span class="link-base">https://www.novoatalho.pt/listproducts/</span><span
-      class="link-name" id="linkPreviewName"></span>/<span
-      class="link-products" id="linkPreviewProducts"></span>
+
+    <!-- Step 1: filter -->
+    <div id="linkStep1">
+      <p>Que produtos queres incluir no link?</p>
+      <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:14px;">
+        <button class="link-filter-btn active" data-lfilter="all">📦 Todos os produtos</button>
+        <button class="link-filter-btn" data-lfilter="done">✅ Só os concluídos</button>
+        <button class="link-filter-btn" data-lfilter="pending">⏳ Só os que faltam</button>
+        <button class="link-filter-btn" data-lfilter="date">📅 Personalizado — por data de conclusão</button>
+      </div>
+
+      <!-- date picker (hidden unless "date" selected) -->
+      <div id="linkDatePicker" style="display:none;margin-bottom:12px;">
+        <p style="margin-bottom:6px;">Escolhe a data de conclusão:</p>
+        <input type="date" class="modal-input" id="linkDateInput" style="margin-bottom:0">
+        <p style="font-size:0.65rem;color:var(--text3);margin-top:4px;">Irá incluir todos os produtos marcados como feitos nessa data.</p>
+      </div>
+
+      <p id="linkFilterCount" style="font-size:0.72rem;color:var(--accent);min-height:18px;margin-bottom:10px;"></p>
+      <div class="modal-btns">
+        <button class="modal-btn cancel" id="createLinkClose">Cancelar</button>
+        <button class="modal-btn primary" id="linkStep1Next">Seguinte →</button>
+      </div>
     </div>
-    <p id="linkCopyStatus" style="min-height:16px; font-size:0.72rem; color:var(--green);"></p>
-    <div class="modal-btns">
-      <button class="modal-btn cancel" id="createLinkClose">Fechar</button>
-      <button class="modal-btn primary" id="createLinkCopy" style="display:none">📋 Copiar Link</button>
+
+    <!-- Step 2: name + preview -->
+    <div id="linkStep2" style="display:none">
+      <p>Escolhe um nome para o link (letras, números e hífens).</p>
+      <input type="text" class="modal-input" id="linkNameInput" placeholder="ex: lista-junho" maxlength="60"
+             spellcheck="false" autocomplete="off">
+      <p class="link-name-hint" id="linkNameHint"></p>
+      <div class="link-preview" id="linkPreview">
+        <span class="link-base">https://www.novoatalho.pt/listproducts/</span><span
+        class="link-name" id="linkPreviewName"></span>/<span
+        class="link-products" id="linkPreviewProducts"></span>
+      </div>
+      <p id="linkCopyStatus" style="min-height:16px; font-size:0.72rem; color:var(--green);"></p>
+      <div class="modal-btns">
+        <button class="modal-btn cancel" id="linkStep2Back">← Voltar</button>
+        <button class="modal-btn primary" id="createLinkCopy" style="display:none">📋 Copiar Link</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1009,6 +1056,47 @@ document.querySelectorAll('.filter-tab').forEach(tab => {
   });
 });
 
+// ── DATE HELPERS ──
+function dateDayKey(ts) {
+  const d = new Date(ts);
+  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+}
+
+function dateGroupLabel(ts) {
+  if (!ts) return 'Sem data';
+  const now = new Date();
+  const d = new Date(ts);
+  const todayKey = dateDayKey(Date.now());
+  const tsKey = dateDayKey(ts);
+
+  const diffMs = new Date(todayKey.replace(/-/g,'/')).getTime() - new Date(tsKey.replace(/-/g,'/')).getTime();
+  // rough day diff via midnight comparison
+  const today = new Date(); today.setHours(0,0,0,0);
+  const target = new Date(d); target.setHours(0,0,0,0);
+  const diffDays = Math.round((today - target) / 86400000);
+
+  if (diffDays === 0) return 'Hoje';
+  if (diffDays === 1) return 'Ontem';
+  if (diffDays < 7) return `Há ${diffDays} dias`;
+  if (diffDays < 14) return 'Há 1 semana';
+  if (diffDays < 30) return `Há ${Math.floor(diffDays/7)} semanas`;
+  if (diffDays < 60) return 'Há 1 mês';
+  return d.toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' });
+}
+
+function groupByDate(prods) {
+  const groups = {}; // label -> { ts, items[] }
+  prods.forEach(p => {
+    const label = dateGroupLabel(p.doneAt);
+    const ts = p.doneAt || 0;
+    if (!groups[label]) groups[label] = { ts, items: [] };
+    groups[label].items.push(p);
+    if (ts > groups[label].ts) groups[label].ts = ts;
+  });
+  // sort groups newest first
+  return Object.entries(groups).sort((a, b) => b[1].ts - a[1].ts);
+}
+
 // ── RENDER PRODUCTS ──
 function getFilteredProducts() {
   if (!activeThemeId) return [];
@@ -1069,23 +1157,31 @@ function renderProducts() {
       appendSection(list, `Por fazer — ${pending.length}`, pending, theme);
     }
     if (done.length > 0) {
-      appendSection(list, `Feitos — ${done.length}`, done, theme);
+      const groups = groupByDate(done);
+      groups.forEach(([label, group]) => {
+        appendSection(list, `✓ ${label} — ${group.items.length}`, group.items, theme, true);
+      });
     }
+  } else if (filterState === 'done' && !searchQuery) {
+    // also group by date when filtering done
+    const groups = groupByDate(filtered);
+    groups.forEach(([label, group]) => {
+      appendSection(list, `✓ ${label} — ${group.items.length}`, group.items, theme, true);
+    });
   } else {
     appendSection(list, null, filtered, theme);
   }
 }
 
-function appendSection(list, label, prods, theme) {
+function appendSection(list, label, prods, theme, isDoneGroup = false) {
   if (label) {
     const lbl = document.createElement('div');
-    lbl.className = 'section-label';
+    lbl.className = 'section-label' + (isDoneGroup ? ' done-label' : '');
     lbl.textContent = label;
     list.appendChild(lbl);
   }
 
   prods.forEach(item => {
-    // find real index for mutations
     const realIndex = theme.products.indexOf(item);
     const div = document.createElement('div');
     div.className = 'product' + (item.done ? ' done' : '');
@@ -1093,6 +1189,16 @@ function appendSection(list, label, prods, theme) {
     const code = document.createElement('div');
     code.className = 'product-code';
     code.innerHTML = highlightMatch(item.code, searchQuery);
+
+    // timestamp badge on done items
+    if (item.done && item.doneAt) {
+      const ts = document.createElement('span');
+      ts.className = 'done-time';
+      const d = new Date(item.doneAt);
+      ts.textContent = d.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' });
+      ts.title = d.toLocaleString('pt-PT');
+      code.appendChild(ts);
+    }
 
     const btns = document.createElement('div');
     btns.className = 'product-btns';
@@ -1112,6 +1218,7 @@ function appendSection(list, label, prods, theme) {
       if (autoMark && !item.done) {
         pushUndo();
         item.done = true;
+        item.doneAt = Date.now();
         saveTheme(activeThemeId);
         renderProducts(); renderSidebar();
       }
@@ -1124,6 +1231,7 @@ function appendSection(list, label, prods, theme) {
     markBtn.onclick = () => {
       pushUndo();
       item.done = !item.done;
+      item.doneAt = item.done ? Date.now() : null;
       saveTheme(activeThemeId);
       renderProducts(); renderSidebar();
     };
@@ -1430,6 +1538,40 @@ function notify(msg, isError=false) {
 
 // ── CRIAR LINK ──
 const BASE_LINK_URL = 'https://www.novoatalho.pt/listproducts/';
+let linkFilterMode = 'all'; // 'all' | 'done' | 'pending' | 'date'
+
+function getProductsForLink() {
+  if (!activeThemeId) return [];
+  const prods = themes[activeThemeId].products;
+  if (linkFilterMode === 'all') return prods;
+  if (linkFilterMode === 'done') return prods.filter(p => p.done);
+  if (linkFilterMode === 'pending') return prods.filter(p => !p.done);
+  if (linkFilterMode === 'date') {
+    const dateVal = document.getElementById('linkDateInput').value;
+    if (!dateVal) return [];
+    return prods.filter(p => {
+      if (!p.done || !p.doneAt) return false;
+      const d = new Date(p.doneAt);
+      const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      return key === dateVal;
+    });
+  }
+  return prods;
+}
+
+function updateLinkFilterCount() {
+  const prods = getProductsForLink();
+  const el = document.getElementById('linkFilterCount');
+  if (prods.length === 0) {
+    el.textContent = linkFilterMode === 'date' && !document.getElementById('linkDateInput').value
+      ? 'Escolhe uma data acima.'
+      : '⚠ Nenhum produto corresponde a este filtro.';
+    el.style.color = 'var(--red)';
+  } else {
+    el.textContent = `✓ ${prods.length} produto(s) serão incluídos no link`;
+    el.style.color = 'var(--accent)';
+  }
+}
 
 function buildLink(name, products) {
   const slug = encodeURIComponent(name);
@@ -1452,51 +1594,90 @@ function updateLinkPreview() {
     return;
   }
 
-  // Validate: only letters, numbers, hyphens
   const clean = rawName.replace(/[^a-zA-Z0-9\-]/g, '');
   if (clean !== rawName) {
-    hint.textContent = '⚠ Apenas letras, números e hífens são permitidos.';
+    hint.textContent = '⚠ Só letras, números e hífens são permitidos.';
     hint.style.color = 'var(--red)';
     preview.classList.remove('visible');
     copyBtn.style.display = 'none';
     return;
   }
 
-  if (!activeThemeId || themes[activeThemeId].products.length === 0) {
-    hint.textContent = 'O tema não tem produtos.';
+  const prods = getProductsForLink();
+  if (prods.length === 0) {
+    hint.textContent = 'Nenhum produto para incluir.';
     hint.style.color = 'var(--red)';
     preview.classList.remove('visible');
     copyBtn.style.display = 'none';
     return;
   }
 
-  hint.textContent = `✓ Link válido — ${themes[activeThemeId].products.length} produto(s)`;
+  hint.textContent = `✓ Link válido — ${prods.length} produto(s)`;
   hint.style.color = 'var(--green)';
 
-  const products = themes[activeThemeId].products;
-  const productStr = products.map(p => p.code).join(';');
-  const displayProducts = productStr.length > 60 ? productStr.slice(0, 60) + '…' : productStr;
-
+  const productStr = prods.map(p => p.code).join(';');
+  const displayProducts = productStr.length > 55 ? productStr.slice(0, 55) + '…' : productStr;
   document.getElementById('linkPreviewName').textContent = rawName;
   document.getElementById('linkPreviewProducts').textContent = displayProducts;
   preview.classList.add('visible');
   copyBtn.style.display = 'inline-block';
 }
 
+// Open modal
 document.getElementById('createLinkBtn').addEventListener('click', () => {
   if (!activeThemeId) { notify('Seleciona um tema primeiro!', true); return; }
+  // reset
+  linkFilterMode = 'all';
+  document.querySelectorAll('.link-filter-btn').forEach(b => b.classList.toggle('active', b.dataset.lfilter === 'all'));
+  document.getElementById('linkDatePicker').style.display = 'none';
+  document.getElementById('linkDateInput').value = '';
+  document.getElementById('linkStep1').style.display = 'block';
+  document.getElementById('linkStep2').style.display = 'none';
   document.getElementById('linkNameInput').value = '';
   document.getElementById('linkNameHint').textContent = '';
   document.getElementById('linkPreview').classList.remove('visible');
   document.getElementById('createLinkCopy').style.display = 'none';
   document.getElementById('linkCopyStatus').textContent = '';
+  updateLinkFilterCount();
   document.getElementById('createLinkModal').classList.add('open');
   document.getElementById('sidebar').classList.remove('open');
-  setTimeout(() => document.getElementById('linkNameInput').focus(), 50);
 });
 
+// Filter buttons
+document.querySelectorAll('.link-filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.link-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    linkFilterMode = btn.dataset.lfilter;
+    document.getElementById('linkDatePicker').style.display = linkFilterMode === 'date' ? 'block' : 'none';
+    updateLinkFilterCount();
+  });
+});
+
+document.getElementById('linkDateInput').addEventListener('change', updateLinkFilterCount);
+
+// Close
 document.getElementById('createLinkClose').addEventListener('click', () => {
   document.getElementById('createLinkModal').classList.remove('open');
+});
+
+// Step 1 → Step 2
+document.getElementById('linkStep1Next').addEventListener('click', () => {
+  const prods = getProductsForLink();
+  if (prods.length === 0) {
+    notify('Nenhum produto corresponde ao filtro selecionado.', true);
+    return;
+  }
+  document.getElementById('linkStep1').style.display = 'none';
+  document.getElementById('linkStep2').style.display = 'block';
+  setTimeout(() => document.getElementById('linkNameInput').focus(), 50);
+  updateLinkPreview();
+});
+
+// Step 2 → Step 1
+document.getElementById('linkStep2Back').addEventListener('click', () => {
+  document.getElementById('linkStep2').style.display = 'none';
+  document.getElementById('linkStep1').style.display = 'block';
 });
 
 document.getElementById('linkNameInput').addEventListener('input', updateLinkPreview);
@@ -1511,14 +1692,14 @@ document.getElementById('linkPreview').addEventListener('click', () => {
 document.getElementById('createLinkCopy').addEventListener('click', () => {
   const name = document.getElementById('linkNameInput').value.trim();
   if (!name || !activeThemeId) return;
-  const link = buildLink(name, themes[activeThemeId].products);
+  const prods = getProductsForLink();
+  const link = buildLink(name, prods);
   navigator.clipboard.writeText(link).then(() => {
-    const status = document.getElementById('linkCopyStatus');
-    status.textContent = '✓ Link copiado para a área de transferência!';
-    status.style.color = 'var(--green)';
+    document.getElementById('linkCopyStatus').textContent = '✓ Link copiado!';
+    document.getElementById('linkCopyStatus').style.color = 'var(--green)';
     notify('Link copiado!');
   }).catch(() => {
-    document.getElementById('linkCopyStatus').textContent = '❌ Erro ao copiar. Copia manualmente.';
+    document.getElementById('linkCopyStatus').textContent = '❌ Erro ao copiar.';
     document.getElementById('linkCopyStatus').style.color = 'var(--red)';
   });
 });
@@ -1852,4 +2033,3 @@ if (firstId) selectTheme(firstId);
 </script>
 </body>
 </html>
-
