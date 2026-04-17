@@ -17,9 +17,9 @@
   --btn-pad-v: 7px; --btn-pad-h: 13px; --btn-font: 0.75rem;
 }
 body.light {
-  --bg:#f4f4f7;--surface:#fff;--surface2:#eaeaef;--surface3:#dcdce6;--border:#d0d0dc;
-  --text:#1a1a2e;--text2:#5a5a80;--text3:#9090b0;--done-text:#2e7d40;
-  --green-dim:rgba(40,167,69,0.12);--red-dim:rgba(220,53,69,0.1);
+  --bg:#f4f4f7; --surface:#fff; --surface2:#eaeaef; --surface3:#dcdce6; --border:#d0d0dc;
+  --text:#1a1a2e; --text2:#5a5a80; --text3:#9090b0; --done-text:#2e7d40;
+  --green-dim:rgba(40,167,69,0.12); --red-dim:rgba(220,53,69,0.1);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--text);min-height:100vh;}
@@ -34,19 +34,16 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .theme-item{display:flex;flex-direction:column;padding:10px 12px;border-radius:var(--radius);cursor:pointer;margin-bottom:5px;transition:all .15s;border:1px solid transparent;}
 .theme-item:hover{background:var(--surface2);}
 .theme-item.active{background:var(--surface2);border-color:var(--accent);}
-.theme-item.active.tt-theme{border-color:#10b981;}
 .theme-item-top{display:flex;align-items:center;gap:8px;}
 .theme-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;}
 .theme-name{font-size:.78rem;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .theme-count{font-size:.62rem;color:var(--text2);background:var(--bg);padding:2px 6px;border-radius:20px;white-space:nowrap;}
-.theme-tt-badge{font-size:.55rem;background:rgba(16,185,129,.15);color:#10b981;border:1px solid #10b981;border-radius:10px;padding:1px 5px;font-weight:700;white-space:nowrap;flex-shrink:0;}
 .theme-delete-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:.72rem;padding:2px 5px;border-radius:4px;opacity:0;transition:opacity .15s;}
 .theme-item:hover .theme-delete-btn{opacity:1;}
 .theme-delete-btn:hover{color:var(--red);}
 .theme-progress{margin-top:7px;}
 .theme-progress-bar{height:3px;background:var(--surface3);border-radius:2px;overflow:hidden;}
 .theme-progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease;}
-.tt-theme .theme-progress-fill{background:#10b981;}
 #sidebar-footer{padding:12px 8px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:7px;}
 #new-theme-input{background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.73rem;padding:8px 10px;border-radius:6px;width:100%;outline:none;transition:border-color .15s;}
 #new-theme-input:focus{border-color:var(--accent);}
@@ -55,8 +52,6 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .sidebar-btn:hover{background:var(--accent2);}
 .sidebar-btn.secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
 .sidebar-btn.secondary:hover{border-color:var(--accent);color:var(--accent);}
-.sidebar-btn.tt-btn{background:rgba(16,185,129,.12);color:#10b981;border:1px solid #10b981;}
-.sidebar-btn.tt-btn:hover{background:rgba(16,185,129,.25);}
 
 /* ── MAIN ── */
 #main{margin-left:var(--sidebar-w);min-height:100vh;display:flex;flex-direction:column;}
@@ -90,14 +85,17 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .dropdown-item.danger:hover{background:var(--red-dim);}
 .dropdown-divider{border:none;border-top:1px solid var(--border);margin:4px 0;}
 .dropdown-item .item-shortcut{margin-left:auto;font-size:.6rem;color:var(--text3);background:var(--surface3);padding:2px 5px;border-radius:4px;}
+
 .toggle-wrap{display:flex;align-items:center;gap:7px;font-size:.68rem;color:var(--text2);white-space:nowrap;}
 .toggle-switch{width:38px;height:21px;background:var(--surface2);border-radius:20px;position:relative;cursor:pointer;border:1px solid var(--border);transition:background .2s;flex-shrink:0;}
 .toggle-switch.on{background:var(--accent);border-color:var(--accent);}
 .toggle-knob{position:absolute;width:15px;height:15px;background:#fff;border-radius:50%;top:2px;left:2px;transition:transform .2s;}
 .toggle-switch.on .toggle-knob{transform:translateX(17px);}
+
 #statsBox{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:5px 11px;border-radius:6px;font-size:.72rem;white-space:nowrap;min-width:150px;}
 #statsBox .stat-accent{color:var(--accent);font-weight:700;}
 #statsBox .stat-green{color:var(--green);font-weight:700;}
+
 #searchRow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 #searchInput{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.78rem;padding:7px 12px 7px 34px;border-radius:6px;outline:none;transition:border-color .15s;width:220px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238888a0' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:10px center;}
 #searchInput:focus{border-color:var(--accent);}
@@ -109,28 +107,6 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 #searchClear{background:none;border:none;color:var(--text3);cursor:pointer;font-size:1rem;padding:2px 6px;transition:color .15s;display:none;}
 #searchClear:hover{color:var(--red);}
 #searchClear.visible{display:block;}
-
-/* ── TEAMTEMA ONLINE BAR ── */
-#onlineBar{background:rgba(16,185,129,.06);border-bottom:1px solid rgba(16,185,129,.18);padding:9px 20px;display:none;align-items:center;gap:10px;flex-wrap:wrap;}
-#onlineBar.visible{display:flex;}
-.online-bar-label{font-size:.6rem;font-weight:700;color:#10b981;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;}
-#onlineMembers{display:flex;gap:7px;flex-wrap:wrap;flex:1;}
-.online-member{display:flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);}
-.online-member.is-online{border-color:var(--green);background:var(--green-dim);}
-.online-member.is-offline{opacity:.4;}
-.member-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.online-member.is-online .member-dot{animation:memberPulse 2s infinite;}
-@keyframes memberPulse{0%,100%{box-shadow:0 0 0 2px rgba(40,167,69,.3)}50%{box-shadow:0 0 0 5px rgba(40,167,69,.08)}}
-.tt-leave-btn{background:none;border:1px solid var(--border);color:var(--text3);font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:3px 9px;border-radius:20px;cursor:pointer;transition:all .15s;white-space:nowrap;}
-.tt-leave-btn:hover{border-color:var(--red);color:var(--red);}
-.tt-room-name{font-size:.62rem;color:var(--text3);white-space:nowrap;}
-
-/* ── TEAMTEMA OFFLINE BANNER ── */
-#ttOfflineBanner{background:rgba(220,53,69,.07);border-bottom:1px solid rgba(220,53,69,.2);padding:8px 20px;display:none;align-items:center;gap:10px;}
-#ttOfflineBanner.visible{display:flex;}
-.tt-offline-text{font-size:.68rem;color:var(--red);flex:1;}
-.tt-go-online-btn{background:none;border:1px solid var(--red);color:var(--red);font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:3px 9px;border-radius:5px;cursor:pointer;transition:all .15s;}
-.tt-go-online-btn:hover{background:var(--red);color:#fff;}
 
 /* ── PRODUCT LIST ── */
 #productList{padding:16px 20px;flex:1;}
@@ -161,27 +137,16 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .mark-btn:hover{border-color:var(--green);color:var(--green);}
 .mark-btn.done{background:var(--green-dim);color:var(--green);border-color:var(--green);}
 .del-btn{background:var(--surface);color:var(--text3);border:1px solid var(--border);}
-.del-btn:hover{background:var(--red-dim);color:var(--red);border-color:var(--red);}
-#resultsInfo{font-size:.68rem;color:var(--text3);padding:4px 0 12px;min-height:24px;}
+	.del-btn:hover{background:var(--red-dim);color:var(--red);border-color:var(--red);}
+	.option-btn{background:var(--surface);color:var(--text3);border:1px solid var(--border);width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;}
+	.option-btn.wrong:hover{background:var(--red-dim);color:var(--red);border-color:var(--red);}
+	.option-btn.wrong.active{background:var(--red);color:#fff;border-color:var(--red);}
+	.option-btn.correct:hover{background:var(--green-dim);color:var(--green);border-color:var(--green);}
+	.option-btn.correct.active{background:var(--green);color:#fff;border-color:var(--green);}
+	.theme-type-badge{font-size:0.55rem;padding:1px 4px;border-radius:4px;margin-left:5px;text-transform:uppercase;font-weight:800;}
+	.theme-type-badge.option{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);}
+	#resultsInfo{font-size:.68rem;color:var(--text3);padding:4px 0 12px;min-height:24px;}
 #resultsInfo span{color:var(--accent);font-weight:700;}
-
-/* ── ACTIVITY CONSOLE ── */
-#activityConsole{border:1px solid rgba(16,185,129,.22);border-radius:10px;overflow:hidden;background:var(--surface);margin:16px 20px;display:none;}
-#activityConsole.visible{display:block;}
-#activityConsoleHeader{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(16,185,129,.07);border-bottom:1px solid rgba(16,185,129,.18);cursor:pointer;user-select:none;}
-.console-title{font-size:.68rem;font-weight:700;color:#10b981;flex:1;}
-.console-count{font-size:.6rem;color:var(--text3);background:var(--surface3);padding:2px 7px;border-radius:10px;}
-.console-toggle{background:none;border:none;color:var(--text3);cursor:pointer;font-size:.75rem;padding:2px 6px;transition:color .15s;}
-.console-toggle:hover{color:#10b981;}
-#activityEntries{max-height:200px;overflow-y:auto;}
-#activityEntries.collapsed{display:none;}
-.activity-entry{display:flex;align-items:center;gap:8px;padding:7px 14px;border-bottom:1px solid var(--border);animation:fadeIn .15s ease;}
-.activity-entry:last-child{border-bottom:none;}
-.activity-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
-.activity-user{font-weight:700;font-size:.68rem;white-space:nowrap;}
-.activity-action{color:var(--text2);flex:1;font-size:.68rem;}
-.activity-time{color:var(--text3);font-size:.58rem;white-space:nowrap;}
-.console-empty{padding:18px;text-align:center;color:var(--text3);font-size:.68rem;}
 
 /* ── NO THEME ── */
 #noTheme{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;color:var(--text2);padding:60px;text-align:center;}
@@ -208,34 +173,28 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .modal-btn.primary:hover{background:var(--accent2);}
 .modal-btn.danger{background:var(--red);color:#fff;}
 .modal-btn.danger:hover{filter:brightness(1.1);}
-.modal-btn.success{background:var(--green);color:#fff;}
-.modal-btn.success:hover{filter:brightness(1.1);}
 .modal-btn.cancel{background:var(--surface2);color:var(--text2);}
 .modal-btn.cancel:hover{color:var(--text);}
-.modal-btn.tt-green{background:#10b981;color:#fff;}
-.modal-btn.tt-green:hover{background:#0ea572;}
 .modal-warn{background:rgba(220,53,69,.1);border:1px solid rgba(220,53,69,.3);border-radius:6px;padding:10px 12px;margin-bottom:12px;font-size:.72rem;color:var(--red);line-height:1.5;}
 
-/* ── TT MODAL ── */
-.tt-modal h2{color:#10b981!important;}
-.tt-choice-btn{width:100%;padding:14px 16px;border:1px solid var(--border);background:var(--surface2);color:var(--text);border-radius:8px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;text-align:left;display:flex;align-items:center;gap:12px;transition:all .15s;margin-bottom:8px;}
-.tt-choice-btn:hover{border-color:#10b981;color:#10b981;background:rgba(16,185,129,.08);}
-.tt-choice-btn .choice-icon{font-size:1.3rem;}
-.tt-choice-desc{font-size:.62rem;color:var(--text3);display:block;font-weight:400;margin-top:2px;}
-.tt-step-label{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#10b981;margin-bottom:12px;display:block;}
-.tt-id-share{background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.3);border-radius:8px;padding:14px;margin:10px 0;text-align:center;cursor:pointer;transition:background .15s;}
-.tt-id-share:hover{background:rgba(16,185,129,.15);}
-.tt-id-label{font-size:.6rem;color:#10b981;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
-.tt-id-value{font-size:.82rem;color:#10b981;font-weight:700;word-break:break-all;}
-.tt-info-row{display:flex;align-items:center;gap:8px;font-size:.68rem;color:var(--text2);padding:8px 12px;background:var(--surface2);border-radius:6px;margin-bottom:10px;}
-.tt-current-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.28);color:#10b981;border-radius:8px;padding:10px 14px;font-size:.76rem;font-weight:700;margin-bottom:12px;width:100%;}
-.tt-current-badge .tcc-dot{width:8px;height:8px;border-radius:50%;background:#10b981;animation:memberPulse 2s infinite;}
-.modal-input.tt-input:focus{border-color:#10b981;}
-.tt-pass-hint{font-size:.62rem;color:var(--text3);margin-top:-6px;margin-bottom:10px;line-height:1.5;}
-
 /* ── NOTIF ── */
-#notif{position:fixed;bottom:20px;right:20px;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--green);color:var(--text);padding:10px 16px;border-radius:8px;font-size:.76rem;font-weight:600;z-index:999;transform:translateX(130%);transition:transform .3s ease;max-width:280px;}
-#notif.show{transform:translateX(0);}
+	#notif{position:fixed;bottom:20px;right:20px;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--green);color:var(--text);padding:10px 16px;border-radius:8px;font-size:.76rem;font-weight:600;z-index:999;transform:translateX(130%);transition:transform .3s ease;max-width:280px;}
+	#notif.show{transform:translateX(0);}
+	
+	/* ── ASSISTANT ── */
+	#assistant-btn{position:fixed;bottom:20px;right:20px;width:50px;height:50px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,0.3);z-index:900;transition:transform 0.2s;}
+	#assistant-btn:hover{transform:scale(1.1);}
+	#assistant-panel{position:fixed;bottom:80px;right:20px;width:350px;height:450px;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:none;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,0.4);z-index:900;overflow:hidden;}
+	#assistant-panel.open{display:flex;}
+	#assistant-header{padding:15px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+	#assistant-header h3{font-family:'Syne',sans-serif;font-size:0.9rem;color:var(--accent);}
+	#assistant-chat{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px;}
+	.chat-msg{padding:8px 12px;border-radius:10px;font-size:0.75rem;max-width:85%;line-height:1.5;}
+	.chat-msg.user{align-self:flex-end;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);}
+	.chat-msg.ai{align-self:flex-start;background:var(--surface3);color:var(--text);border:1px solid var(--border);}
+	#assistant-input-area{padding:10px;border-top:1px solid var(--border);display:flex;gap:8px;}
+	#assistant-input{flex:1;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px;border-radius:6px;font-size:0.75rem;outline:none;}
+	#assistant-send{background:var(--accent);color:#fff;border:none;padding:0 12px;border-radius:6px;cursor:pointer;font-weight:bold;}
 
 /* ── STATUS BADGE ── */
 #statusBadge{display:flex;align-items:center;gap:6px;font-size:.68rem;font-weight:700;padding:5px 11px;border-radius:20px;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:all .15s;white-space:nowrap;user-select:none;}
@@ -271,8 +230,8 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .btn-size-pill:hover:not(.active){border-color:var(--text3);color:var(--text);}
 .export-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.73rem;font-weight:700;padding:8px 14px;border-radius:6px;cursor:pointer;transition:all .15s;width:100%;margin-top:4px;}
 .export-btn:hover{border-color:var(--accent);color:var(--accent);}
-.section-label.done-label{color:var(--done-text);}
-.done-time{font-size:.58rem;color:var(--text3);font-weight:400;margin-left:8px;letter-spacing:0;}
+
+/* Link filter buttons */
 .link-filter-btn{width:100%;text-align:left;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:7px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--text2);transition:all .15s;}
 .link-filter-btn:hover{border-color:var(--text3);color:var(--text);}
 .link-filter-btn.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent);font-weight:700;}
@@ -280,11 +239,15 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
 .link-preview:hover{background:var(--accent-dim);}
 .link-preview.visible{display:block;}
 .link-name-hint{font-size:.65rem;color:var(--text3);margin-bottom:10px;line-height:1.5;}
+
 #settingsBtn{background:var(--surface);border:1px solid var(--border);color:var(--text2);font-size:1rem;padding:6px 10px;border-radius:6px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;}
 #settingsBtn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* Tooltip */
 #tooltip{position:fixed;z-index:9999;pointer-events:none;background:var(--surface3);border:1px solid var(--border);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;padding:5px 9px;border-radius:6px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.4);opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s;}
 #tooltip.visible{opacity:1;transform:translateY(0);}
 #tooltip .tip-shortcut{color:var(--text3);margin-left:6px;background:var(--surface);padding:1px 4px;border-radius:3px;font-size:.62rem;}
+
 #menu-toggle{display:none;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:1.05rem;padding:6px 10px;border-radius:6px;cursor:pointer;}
 .empty-products{text-align:center;padding:50px 20px;color:var(--text3);}
 .empty-products .icon{font-size:2.2rem;margin-bottom:10px;}
@@ -307,10 +270,12 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     <div id="theme-count-badge">0 temas</div>
   </div>
   <div id="themes-list"></div>
-  <div id="sidebar-footer">
-    <input type="text" id="new-theme-input" placeholder="Nome do novo tema..." maxlength="40">
-    <button class="sidebar-btn" id="createThemeBtn">+ Criar Tema</button>
-    <button class="sidebar-btn tt-btn" id="ttBtn">🤝 TeamTema</button>
+	  <div id="sidebar-footer">
+	    <input type="text" id="new-theme-input" placeholder="Nome do novo tema..." maxlength="40">
+	    <div style="display:flex;gap:5px;margin-bottom:5px;">
+	      <button class="sidebar-btn" id="createThemeBtn" style="flex:1">+ Padrão</button>
+	      <button class="sidebar-btn secondary" id="createOptionThemeBtn" style="flex:1;font-size:0.65rem;">+ Opção</button>
+	    </div>
     <button class="sidebar-btn secondary" id="shareBtn">⬆ Partilhar Tema Ativo</button>
     <button class="sidebar-btn secondary" id="importBtn">⬇ Importar Tema (ID)</button>
     <button class="sidebar-btn secondary" id="createLinkBtn">🔗 Criar Link</button>
@@ -361,20 +326,6 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     </div>
   </div>
 
-  <!-- TeamTema Online Bar -->
-  <div id="onlineBar">
-    <div class="online-bar-label">🤝 TeamTema</div>
-    <div id="ttRoomName" class="tt-room-name"></div>
-    <div id="onlineMembers"></div>
-    <button class="tt-leave-btn" id="ttLeaveBtn">Sair</button>
-  </div>
-
-  <!-- Offline Banner -->
-  <div id="ttOfflineBanner">
-    <div class="tt-offline-text">⚠ Estás offline — as tuas ações não serão registadas no TeamTema</div>
-    <button class="tt-go-online-btn" id="ttGoOnlineBtn">Ficar Online</button>
-  </div>
-
   <div id="noTheme">
     <div class="big">🗂</div>
     <h2>Nenhum tema selecionado</h2>
@@ -384,19 +335,9 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
   <div id="productList" style="display:none">
     <div id="resultsInfo"></div>
   </div>
-
-  <!-- Activity Console -->
-  <div id="activityConsole">
-    <div id="activityConsoleHeader">
-      <span class="console-title">📟 Consola do TeamTema</span>
-      <span class="console-count" id="consoleCount">0 ações</span>
-      <button class="console-toggle" id="consoleToggle">▼</button>
-    </div>
-    <div id="activityEntries"></div>
-  </div>
 </div>
 
-<!-- ═══ MODALS ORIGINAIS ═══ -->
+<!-- MODAL: Share -->
 <div class="modal-overlay" id="shareModal">
   <div class="modal"><h2>⬆ Partilhar Tema</h2><p>Clica no ID abaixo para copiar.</p>
     <div class="modal-id-box" id="shareIdBox">—</div>
@@ -404,6 +345,8 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     <div class="modal-btns"><button class="modal-btn cancel" id="shareClose">Fechar</button></div>
   </div>
 </div>
+
+<!-- MODAL: Import -->
 <div class="modal-overlay" id="importModal">
   <div class="modal"><h2>⬇ Importar Tema</h2><p>Cola o ID que o teu colega te enviou:</p>
     <input type="text" class="modal-input" id="importIdInput" placeholder="Cola o ID aqui...">
@@ -411,6 +354,8 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     <div class="modal-btns"><button class="modal-btn cancel" id="importClose">Cancelar</button><button class="modal-btn primary" id="importConfirm">Importar</button></div>
   </div>
 </div>
+
+<!-- MODAL: Bulk Add -->
 <div class="modal-overlay" id="bulkModal">
   <div class="modal"><h2>📋 Adicionar em Massa</h2><p>Cola os códigos, um por linha ou separados por vírgula.</p>
     <textarea class="modal-textarea" id="bulkInput" placeholder="PROD001&#10;PROD002&#10;..."></textarea>
@@ -418,12 +363,16 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     <div class="modal-btns"><button class="modal-btn cancel" id="bulkClose">Cancelar</button><button class="modal-btn primary" id="bulkConfirm">Adicionar</button></div>
   </div>
 </div>
+
+<!-- MODAL: Rename -->
 <div class="modal-overlay" id="renameModal">
   <div class="modal"><h2>✎ Renomear Tema</h2><p>Introduz o novo nome:</p>
     <input type="text" class="modal-input" id="renameInput" placeholder="Novo nome..." maxlength="40">
     <div class="modal-btns"><button class="modal-btn cancel" id="renameClose">Cancelar</button><button class="modal-btn primary" id="renameConfirm">Renomear</button></div>
   </div>
 </div>
+
+<!-- MODAL: Clear All -->
 <div class="modal-overlay" id="clearModal">
   <div class="modal"><h2>⚠️ Apagar Tudo</h2>
     <div class="modal-warn">Esta ação irá remover TODOS os produtos do tema ativo.</div>
@@ -431,6 +380,8 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     <div class="modal-btns"><button class="modal-btn cancel" id="clearCancel">Cancelar</button><button class="modal-btn danger" id="clearConfirm">Apagar Tudo</button></div>
   </div>
 </div>
+
+<!-- MODAL: Delete Theme -->
 <div class="modal-overlay" id="deleteThemeModal">
   <div class="modal"><h2>🗑 Eliminar Tema</h2>
     <div class="modal-warn" id="deleteThemeWarn"></div>
@@ -438,6 +389,8 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     <div class="modal-btns"><button class="modal-btn cancel" id="deleteThemeCancel">Cancelar</button><button class="modal-btn danger" id="deleteThemeConfirm">Eliminar Permanentemente</button></div>
   </div>
 </div>
+
+<!-- MODAL: Criar Link -->
 <div class="modal-overlay" id="createLinkModal">
   <div class="modal" style="width:460px">
     <h2>🔗 Criar Link</h2>
@@ -446,9 +399,11 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
       <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:14px;">
         <button class="link-filter-btn active" data-lfilter="all">📦 Todos os produtos</button>
         <button class="link-filter-btn" data-lfilter="done">✅ Só os concluídos</button>
-        <button class="link-filter-btn" data-lfilter="pending">⏳ Só os que faltam</button>
-        <button class="link-filter-btn" data-lfilter="date">📅 Por data de conclusão</button>
-      </div>
+	        <button class="link-filter-btn" data-lfilter="pending">⏳ Só os que faltam</button>
+	        <button class="link-filter-btn" data-lfilter="correct" id="linkFilterCorrect" style="display:none">✅ Só os Corretos</button>
+	        <button class="link-filter-btn" data-lfilter="wrong" id="linkFilterWrong" style="display:none">❌ Só os Errados</button>
+	        <button class="link-filter-btn" data-lfilter="date">📅 Por data de conclusão</button>
+	      </div>
       <div id="linkDatePicker" style="display:none;margin-bottom:12px;">
         <input type="date" class="modal-input" id="linkDateInput" style="margin-bottom:0">
       </div>
@@ -456,6 +411,7 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
       <div class="modal-btns"><button class="modal-btn cancel" id="createLinkClose">Cancelar</button><button class="modal-btn primary" id="linkStep1Next">Seguinte →</button></div>
     </div>
     <div id="linkStep2" style="display:none">
+      <p>Escolhe um nome para o link (letras, números e hífens).</p>
       <input type="text" class="modal-input" id="linkNameInput" placeholder="ex: lista-junho" maxlength="60" spellcheck="false">
       <p class="link-name-hint" id="linkNameHint"></p>
       <div class="link-preview" id="linkPreview">
@@ -466,9 +422,26 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     </div>
   </div>
 </div>
-<div id="notif"></div>
 
-<!-- ═══ SETTINGS MODAL ═══ -->
+	<div id="notif"></div>
+	
+	<!-- ASSISTANT -->
+	<div id="assistant-btn" title="Assistente IA">🤖</div>
+	<div id="assistant-panel">
+	  <div id="assistant-header">
+	    <h3>Assistente Novo Atalho</h3>
+	    <button id="assistant-close" style="background:none;border:none;color:var(--text3);cursor:pointer;">✕</button>
+	  </div>
+	  <div id="assistant-chat">
+	    <div class="chat-msg ai">Olá! Sou o teu assistente da Novo Atalho. Como posso ajudar hoje?</div>
+	  </div>
+	  <div id="assistant-input-area">
+	    <input type="text" id="assistant-input" placeholder="Pergunta-me algo...">
+	    <button id="assistant-send">></button>
+	  </div>
+	</div>
+	
+	<!-- MODAL: Settings -->
 <div class="modal-overlay" id="settingsModal">
   <div class="settings-modal">
     <div class="settings-header"><h2>⚙ Configurações</h2><button class="settings-close" id="settingsClose">✕</button></div>
@@ -529,100 +502,21 @@ body{font-family:'JetBrains Mono',monospace;background:var(--bg);color:var(--tex
     </div>
     <div class="settings-section">
       <div class="settings-section-title">Exportar</div>
+      <div class="settings-row">
+        <div class="settings-label">Exportar tema ativo<small>Ficheiro .xlsx formatado com cores e categorias</small></div>
+      </div>
       <button class="export-btn" id="exportCsvBtn">⬇ Exportar para Excel (.xlsx)</button>
     </div>
   </div>
 </div>
 
-<!-- ═══ TEAMTEMA MODAL ═══ -->
-<div class="modal-overlay" id="ttModal">
-  <div class="modal tt-modal" style="width:440px">
-    <!-- Step: escolha -->
-    <div id="ttStep-choice">
-      <h2>🤝 TeamTema</h2>
-      <p>Trabalha em equipa em tempo real. Todos vêem quem está online e o que foi feito.</p>
-      <button class="tt-choice-btn" id="ttCreateBtn">
-        <span class="choice-icon">➕</span>
-        <span><span>Criar sala de equipa</span><span class="tt-choice-desc">Cria uma nova sala e partilha o ID com a tua equipa</span></span>
-      </button>
-      <button class="tt-choice-btn" id="ttJoinBtn">
-        <span class="choice-icon">🚪</span>
-        <span><span>Entrar numa sala</span><span class="tt-choice-desc">Usa o ID que um colega te enviou para entrar</span></span>
-      </button>
-      <div class="modal-btns"><button class="modal-btn cancel" id="ttChoiceClose">Cancelar</button></div>
-    </div>
-    <!-- Step: criar -->
-    <div id="ttStep-create" style="display:none">
-      <h2>🤝 Criar Sala</h2>
-      <span class="tt-step-label">Passo 1 de 2 — Configura a sala</span>
-      <p>Nome da sala:</p>
-      <input type="text" class="modal-input tt-input" id="ttCreateName" placeholder="ex: Equipa Armazém A" maxlength="30">
-      <p>O teu nome (será visível à equipa):</p>
-      <input type="text" class="modal-input tt-input" id="ttCreateUser" placeholder="ex: João" maxlength="20">
-      <p>Senha da sala:</p>
-      <input type="password" class="modal-input tt-input" id="ttCreatePass1" placeholder="Senha...">
-      <p>Confirmar senha:</p>
-      <input type="password" class="modal-input tt-input" id="ttCreatePass2" placeholder="Repete a senha...">
-      <p class="tt-pass-hint" id="ttCreatePassHint"></p>
-      <div class="modal-btns">
-        <button class="modal-btn cancel" id="ttCreateBack">← Voltar</button>
-        <button class="modal-btn tt-green" id="ttCreateConfirm">Criar Sala →</button>
-      </div>
-    </div>
-    <!-- Step: sala criada (mostrar ID) -->
-    <div id="ttStep-created" style="display:none">
-      <h2>🤝 Sala Criada!</h2>
-      <span class="tt-step-label">Partilha este ID com a tua equipa</span>
-      <div class="tt-id-share" id="ttCreatedIdBox">
-        <div class="tt-id-label">ID da Sala — clica para copiar</div>
-        <div class="tt-id-value" id="ttCreatedIdValue">—</div>
-      </div>
-      <div class="tt-info-row">💡 Guarda este ID. Qualquer pessoa com o ID + senha pode entrar na sala.</div>
-      <p id="ttCreatedStatus" style="min-height:16px;font-size:.7rem;color:#10b981;"></p>
-      <div class="modal-btns"><button class="modal-btn tt-green" id="ttCreatedDone">Entrar na Sala ✓</button></div>
-    </div>
-    <!-- Step: entrar -->
-    <div id="ttStep-join" style="display:none">
-      <h2>🤝 Entrar na Sala</h2>
-      <span class="tt-step-label">Insere os dados da sala</span>
-      <p>ID da sala:</p>
-      <input type="text" class="modal-input tt-input" id="ttJoinId" placeholder="Cola o ID aqui..." spellcheck="false">
-      <p>O teu nome:</p>
-      <input type="text" class="modal-input tt-input" id="ttJoinUser" placeholder="ex: Maria" maxlength="20">
-      <p>Senha da sala:</p>
-      <input type="password" class="modal-input tt-input" id="ttJoinPass" placeholder="Senha...">
-      <p class="tt-pass-hint" id="ttJoinStatus" style="min-height:16px;color:var(--red);"></p>
-      <div class="modal-btns">
-        <button class="modal-btn cancel" id="ttJoinBack">← Voltar</button>
-        <button class="modal-btn tt-green" id="ttJoinConfirm">Entrar →</button>
-      </div>
-    </div>
-    <!-- Step: já está na sala (gerir) -->
-    <div id="ttStep-manage" style="display:none">
-      <h2>🤝 TeamTema</h2>
-      <div class="tt-current-badge"><div class="tcc-dot"></div><span id="ttManageRoomName">—</span></div>
-      <div class="tt-info-row">👤 A jogar como: <strong id="ttManageUser" style="margin-left:4px;color:#10b981"></strong></div>
-      <div class="tt-info-row">🆔 ID da sala: <strong id="ttManageId" style="margin-left:4px;font-size:.62rem;word-break:break-all;cursor:pointer;color:#10b981" id="ttManageIdClick" onclick="copyTTId()">clica para copiar</strong></div>
-      <div class="settings-row" style="margin-top:8px">
-        <div class="settings-label">Estado no TeamTema<small>Offline = as tuas ações não são registadas</small></div>
-        <div class="toggle-switch" id="ttOnlineToggle"><div class="toggle-knob"></div></div>
-      </div>
-      <div class="modal-btns" style="margin-top:14px">
-        <button class="modal-btn cancel" id="ttManageClose">Fechar</button>
-        <button class="modal-btn danger" id="ttManageLeave">Sair da Sala</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  STORAGE / HELPERS
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 const LS_INDEX = 'themes_index_v2';
 const LS_THEME = id => 'theme_data_v2_' + id;
 const LS_AUTO  = 'autoMark_v2';
-const LS_TT    = 'teamtema_session_v1';
 
 let themes = {};
 let activeThemeId = null;
@@ -638,12 +532,12 @@ function highlightMatch(text, query) {
   if (!query) return esc(text);
   const idx = text.toUpperCase().indexOf(query.toUpperCase());
   if (idx === -1) return esc(text);
-  return esc(text.slice(0,idx)) + '<mark>' + esc(text.slice(idx, idx+query.length)) + '</mark>' + esc(text.slice(idx+query.length));
+  return esc(text.slice(0,idx)) + '<mark>' + esc(text.slice(idx,idx+query.length)) + '</mark>' + esc(text.slice(idx+query.length));
 }
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  LOAD / SAVE
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 function loadAll() {
   try {
     const ids = JSON.parse(localStorage.getItem(LS_INDEX) || '[]');
@@ -660,9 +554,9 @@ function loadAll() {
 function persistIndex() { localStorage.setItem(LS_INDEX, JSON.stringify(Object.keys(themes))); }
 function saveTheme(id) { localStorage.setItem(LS_THEME(id), JSON.stringify(themes[id])); persistIndex(); }
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  SIDEBAR
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 function renderSidebar() {
   const list = document.getElementById('themes-list');
   list.innerHTML = '';
@@ -673,17 +567,15 @@ function renderSidebar() {
     const total = theme.products.length;
     const pct = total > 0 ? Math.round((done/total)*100) : 0;
     const allDone = total > 0 && done === total;
-    const isTT = ttSession && ttSession.themeId === id;
     const div = document.createElement('div');
-    div.className = 'theme-item' + (id===activeThemeId?' active':'') + (isTT?' tt-theme':'');
-    div.innerHTML = `
-      <div class="theme-item-top">
-        <div class="theme-dot" style="${allDone?'background:var(--green)':''}"></div>
-        <div class="theme-name">${esc(theme.name)}</div>
-        ${isTT ? '<div class="theme-tt-badge">🤝 TT</div>' : ''}
-        <div class="theme-count">${done}/${total}</div>
-        <button class="theme-delete-btn" title="Eliminar">✕</button>
-      </div>
+    div.className = 'theme-item' + (id===activeThemeId?' active':'');
+	    div.innerHTML = `
+	      <div class="theme-item-top">
+	        <div class="theme-dot" style="${allDone?'background:var(--green)':''}"></div>
+	        <div class="theme-name">${esc(theme.name)}${theme.type==='option'?'<span class="theme-type-badge option">Opção</span>':''}</div>
+	        <div class="theme-count">${done}/${total}</div>
+	        <button class="theme-delete-btn" title="Eliminar">✕</button>
+	      </div>
       <div class="theme-progress">
         <div class="theme-progress-bar">
           <div class="theme-progress-fill ${allDone?'theme-progress-done':''}" style="width:${pct}%"></div>
@@ -695,9 +587,9 @@ function renderSidebar() {
   });
 }
 
-// ════════════════════════════════════════════════════════
-//  DELETE THEME
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
+//  DELETE THEME (modal)
+// ════════════════════════════════════════
 let pendingDeleteThemeId = null;
 function openDeleteThemeModal(id, name) {
   pendingDeleteThemeId = id;
@@ -709,17 +601,13 @@ function openDeleteThemeModal(id, name) {
 document.getElementById('deleteThemeCancel').addEventListener('click', () => { document.getElementById('deleteThemeModal').classList.remove('open'); pendingDeleteThemeId = null; });
 document.getElementById('deleteThemeConfirm').addEventListener('click', () => {
   if (!pendingDeleteThemeId) return;
-  const id = pendingDeleteThemeId;
-  const name = themes[id]?.name || '';
-  localStorage.removeItem(LS_THEME(id));
-  delete themes[id];
-  persistIndex();
+  const id = pendingDeleteThemeId, name = themes[id]?.name || '';
+  localStorage.removeItem(LS_THEME(id)); delete themes[id]; persistIndex();
   if (activeThemeId === id) { activeThemeId = null; showNoTheme(); }
   document.getElementById('deleteThemeModal').classList.remove('open');
-  pendingDeleteThemeId = null;
-  renderSidebar();
-  notify(`Tema "${name}" eliminado`);
+  pendingDeleteThemeId = null; renderSidebar(); notify(`Tema "${name}" eliminado`);
 });
+
 function showNoTheme() {
   document.getElementById('noTheme').style.display = 'flex';
   document.getElementById('productList').style.display = 'none';
@@ -727,20 +615,25 @@ function showNoTheme() {
   document.getElementById('current-theme-title').removeAttribute('data-has-theme');
   document.getElementById('statsBox').textContent = '—';
 }
-function selectTheme(id) {
-  activeThemeId = id;
-  undoHistory = []; redoStack = [];
-  document.getElementById('noTheme').style.display = 'none';
-  document.getElementById('productList').style.display = 'block';
-  const t = document.getElementById('current-theme-title');
-  t.textContent = themes[id].name;
-  t.dataset.hasTheme = 'true';
-  renderSidebar(); renderProducts();
-}
 
-// ════════════════════════════════════════════════════════
-//  RENAME THEME
-// ════════════════════════════════════════════════════════
+	function selectTheme(id) {
+	  activeThemeId = id; undoHistory = []; redoStack = [];
+	  document.getElementById('noTheme').style.display = 'none';
+	  document.getElementById('productList').style.display = 'block';
+	  const t = document.getElementById('current-theme-title');
+	  t.textContent = themes[id].name; t.dataset.hasTheme = 'true';
+	  
+	  // Update link filter buttons visibility
+	  const isOption = themes[id].type === 'option';
+	  document.getElementById('linkFilterCorrect').style.display = isOption ? 'block' : 'none';
+	  document.getElementById('linkFilterWrong').style.display = isOption ? 'block' : 'none';
+	  
+	  renderSidebar(); renderProducts();
+	}
+
+// ════════════════════════════════════════
+//  RENAME
+// ════════════════════════════════════════
 document.getElementById('current-theme-title').addEventListener('click', () => {
   if (!activeThemeId) return;
   document.getElementById('renameInput').value = themes[activeThemeId].name;
@@ -751,31 +644,29 @@ document.getElementById('renameClose').addEventListener('click', () => document.
 document.getElementById('renameConfirm').addEventListener('click', () => {
   const val = document.getElementById('renameInput').value.trim();
   if (!val || !activeThemeId) return;
-  themes[activeThemeId].name = val;
-  saveTheme(activeThemeId);
+  themes[activeThemeId].name = val; saveTheme(activeThemeId);
   document.getElementById('current-theme-title').textContent = val;
   document.getElementById('renameModal').classList.remove('open');
   renderSidebar(); notify('Tema renomeado: ' + val);
 });
 document.getElementById('renameInput').addEventListener('keypress', e => { if (e.key==='Enter') document.getElementById('renameConfirm').click(); });
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  CREATE THEME
-// ════════════════════════════════════════════════════════
-document.getElementById('createThemeBtn').addEventListener('click', () => {
-  const inp = document.getElementById('new-theme-input');
-  const name = inp.value.trim();
-  if (!name) return;
-  const id = genId();
-  themes[id] = { name, products: [] };
-  saveTheme(id); inp.value = '';
-  renderSidebar(); selectTheme(id); notify('Tema criado: ' + name);
-});
+// ════════════════════════════════════════
+	function createTheme(type = 'standard') {
+	  const inp = document.getElementById('new-theme-input'), name = inp.value.trim();
+	  if (!name) return;
+	  const id = genId(); themes[id] = { name, products: [], type };
+	  saveTheme(id); inp.value = ''; renderSidebar(); selectTheme(id); notify(`Tema ${type==='option'?'de opção ':' '}criado: ` + name);
+	}
+	document.getElementById('createThemeBtn').addEventListener('click', () => createTheme('standard'));
+	document.getElementById('createOptionThemeBtn').addEventListener('click', () => createTheme('option'));
 document.getElementById('new-theme-input').addEventListener('keypress', e => { if (e.key==='Enter') document.getElementById('createThemeBtn').click(); });
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  SEARCH & FILTER
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 document.getElementById('searchInput').addEventListener('input', function() {
   searchQuery = this.value.trim();
   document.getElementById('searchClear').classList.toggle('visible', searchQuery.length > 0);
@@ -792,14 +683,13 @@ document.querySelectorAll('.filter-tab').forEach(tab => {
   });
 });
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  DATE HELPERS
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 function dateGroupLabel(ts) {
   if (!ts) return 'Sem data';
   const d = new Date(ts), today = new Date();
-  today.setHours(0,0,0,0);
-  const target = new Date(d); target.setHours(0,0,0,0);
+  today.setHours(0,0,0,0); const target = new Date(d); target.setHours(0,0,0,0);
   const diffDays = Math.round((today - target) / 86400000);
   if (diffDays === 0) return 'Hoje';
   if (diffDays === 1) return 'Ontem';
@@ -819,14 +709,16 @@ function groupByDate(prods) {
   return Object.entries(groups).sort((a,b) => b[1].ts - a[1].ts);
 }
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  RENDER PRODUCTS
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 function getFilteredProducts() {
   if (!activeThemeId) return [];
   let prods = themes[activeThemeId].products;
-  if (filterState === 'pending') prods = prods.filter(p => !p.done);
-  else if (filterState === 'done') prods = prods.filter(p => p.done);
+	  if (filterState === 'pending') prods = prods.filter(p => !p.done);
+	  else if (filterState === 'done') prods = prods.filter(p => p.done);
+	  else if (filterState === 'correct') prods = prods.filter(p => p.option === 'correct');
+	  else if (filterState === 'wrong') prods = prods.filter(p => p.option === 'wrong');
   if (searchQuery) prods = prods.filter(p => p.code.toUpperCase().includes(searchQuery.toUpperCase()));
   return prods;
 }
@@ -859,7 +751,7 @@ function renderProducts() {
     const pending = filtered.filter(p => !p.done);
     const done = filtered.filter(p => p.done);
     if (pending.length > 0) appendSection(list, `Por fazer — ${pending.length}`, pending, theme, false, canDrag);
-    if (done.length > 0) { groupByDate(done).forEach(([label, group]) => appendSection(list, `✓ ${label} — ${group.items.length}`, group.items, theme, true, canDrag)); }
+    if (done.length > 0) groupByDate(done).forEach(([label, group]) => appendSection(list, `✓ ${label} — ${group.items.length}`, group.items, theme, true, canDrag));
   } else if (filterState === 'done' && !searchQuery) {
     groupByDate(filtered).forEach(([label, group]) => appendSection(list, `✓ ${label} — ${group.items.length}`, group.items, theme, true, false));
   } else {
@@ -869,7 +761,11 @@ function renderProducts() {
 
 let dragSrcIndex = null;
 function appendSection(list, label, prods, theme, isDoneGroup=false, enableDrag=false) {
-  if (label) { const lbl = document.createElement('div'); lbl.className = 'section-label'+(isDoneGroup?' done-label':''); lbl.textContent = label; list.appendChild(lbl); }
+  if (label) {
+    const lbl = document.createElement('div');
+    lbl.className = 'section-label'+(isDoneGroup?' done-label':'');
+    lbl.textContent = label; list.appendChild(lbl);
+  }
   prods.forEach(item => {
     const realIndex = theme.products.indexOf(item);
     const div = document.createElement('div');
@@ -878,7 +774,7 @@ function appendSection(list, label, prods, theme, isDoneGroup=false, enableDrag=
       div.draggable = true; div.dataset.index = realIndex;
       div.addEventListener('dragstart', e => { dragSrcIndex=realIndex; setTimeout(()=>div.classList.add('dragging'),0); e.dataTransfer.effectAllowed='move'; });
       div.addEventListener('dragend', () => { div.classList.remove('dragging'); document.querySelectorAll('.product').forEach(el=>el.classList.remove('drag-over-top','drag-over-bottom')); dragSrcIndex=null; });
-      div.addEventListener('dragover', e => { e.preventDefault(); if (dragSrcIndex===null||dragSrcIndex===realIndex) return; e.dataTransfer.dropEffect='move'; const rect=div.getBoundingClientRect(),midY=rect.top+rect.height/2; document.querySelectorAll('.product').forEach(el=>el.classList.remove('drag-over-top','drag-over-bottom')); div.classList.add(e.clientY<midY?'drag-over-top':'drag-over-bottom'); });
+      div.addEventListener('dragover', e => { e.preventDefault(); if (dragSrcIndex===null||dragSrcIndex===realIndex) return; e.dataTransfer.dropEffect='move'; const rect=div.getBoundingClientRect(); document.querySelectorAll('.product').forEach(el=>el.classList.remove('drag-over-top','drag-over-bottom')); div.classList.add(e.clientY<rect.top+rect.height/2?'drag-over-top':'drag-over-bottom'); });
       div.addEventListener('dragleave', () => div.classList.remove('drag-over-top','drag-over-bottom'));
       div.addEventListener('drop', e => { e.preventDefault(); if (dragSrcIndex===null||dragSrcIndex===realIndex) return; div.classList.remove('drag-over-top','drag-over-bottom'); const rect=div.getBoundingClientRect(),insertBefore=e.clientY<rect.top+rect.height/2; pushUndo(); const ps=theme.products; const [moved]=ps.splice(dragSrcIndex,1); let ti=ps.indexOf(item); if (!insertBefore) ti+=1; ps.splice(ti,0,moved); saveTheme(activeThemeId); renderProducts(); renderSidebar(); });
     } else { div.style.cursor='default'; }
@@ -897,7 +793,6 @@ function appendSection(list, label, prods, theme, isDoneGroup=false, enableDrag=
     code.addEventListener('dblclick', e => { e.stopPropagation(); startInlineEdit(div, code, item, theme); });
 
     const btns = document.createElement('div'); btns.className = 'product-btns';
-
     const copyBtn = document.createElement('button'); copyBtn.className = 'p-btn copy-btn'; copyBtn.textContent = 'Copiar';
     copyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(item.code).then(() => {
@@ -906,40 +801,61 @@ function appendSection(list, label, prods, theme, isDoneGroup=false, enableDrag=
       }).catch(() => notify('Erro ao copiar', true));
       if (autoMark && !item.done) {
         pushUndo(); item.done = true; item.doneAt = Date.now();
-        ttLogAction(`copiou e marcou "${item.code}" como concluído`);
         saveTheme(activeThemeId); renderProducts(); renderSidebar();
       }
     });
-
     const markBtn = document.createElement('button');
     markBtn.className = 'p-btn mark-btn'+(item.done?' done':'');
     markBtn.textContent = item.done ? '✓ Feito' : '○ Pendente';
     markBtn.addEventListener('click', () => {
-      pushUndo();
-      const wasDone = item.done;
-      item.done = !item.done;
-      item.doneAt = item.done ? Date.now() : null;
-      ttLogAction(item.done ? `marcou "${item.code}" como concluído` : `desmarcou "${item.code}"`);
+      pushUndo(); item.done = !item.done; item.doneAt = item.done ? Date.now() : null;
       saveTheme(activeThemeId); renderProducts(); renderSidebar();
     });
-
     const delBtn = document.createElement('button'); delBtn.className = 'p-btn del-btn'; delBtn.textContent = '✕'; delBtn.title = 'Remover produto';
     delBtn.addEventListener('click', () => {
-      pushUndo();
-      ttLogAction(`removeu o produto "${item.code}"`);
-      theme.products.splice(realIndex, 1);
+      pushUndo(); theme.products.splice(realIndex, 1);
       saveTheme(activeThemeId); renderProducts(); renderSidebar();
     });
+	    btns.append(copyBtn, markBtn, delBtn);
+	    
+	    if (theme.type === 'option') {
+	      const optGroup = document.createElement('div');
+	      optGroup.className = 'product-btns';
+	      optGroup.style.marginLeft = '10px';
+	      
+	      const wrongBtn = document.createElement('button');
+	      wrongBtn.className = 'p-btn option-btn wrong' + (item.option === 'wrong' ? ' active' : '');
+	      wrongBtn.innerHTML = '✕';
+	      wrongBtn.title = 'Marcar como Errado';
+	      wrongBtn.addEventListener('click', () => {
+	        pushUndo();
+	        item.option = item.option === 'wrong' ? null : 'wrong';
+	        saveTheme(activeThemeId); renderProducts();
+	      });
+	      
+	      const correctBtn = document.createElement('button');
+	      correctBtn.className = 'p-btn option-btn correct' + (item.option === 'correct' ? ' active' : '');
+	      correctBtn.innerHTML = '✓';
+	      correctBtn.title = 'Marcar como Correto';
+	      correctBtn.addEventListener('click', () => {
+	        pushUndo();
+	        item.option = item.option === 'correct' ? null : 'correct';
+	        saveTheme(activeThemeId); renderProducts();
+	      });
+	      
+	      optGroup.append(wrongBtn, correctBtn);
+	      div.append(code, optGroup, btns);
+	    } else {
+	      div.append(code, btns);
+	    }
+	    
+	    list.appendChild(div);
+	  });
+	}
 
-    btns.append(copyBtn, markBtn, delBtn);
-    div.append(code, btns);
-    list.appendChild(div);
-  });
-}
-
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  INLINE EDIT
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 function startInlineEdit(div, codeEl, item, theme) {
   div.draggable = false; div.style.cursor = 'default';
   const input = document.createElement('input');
@@ -952,17 +868,17 @@ function startInlineEdit(div, codeEl, item, theme) {
     const newCode = input.value.trim().toUpperCase();
     if (!newCode) { notify('Código não pode estar vazio', true); renderProducts(); return; }
     if (newCode !== item.code) {
-      if (theme.products.some((p,i) => p.code===newCode && p!==item)) { notify(`"${newCode}" já existe!`, true); renderProducts(); return; }
-      const oldCode = item.code;
+      if (theme.products.some(p => p.code===newCode && p!==item)) { notify(`"${newCode}" já existe!`, true); renderProducts(); return; }
       pushUndo(); item.code = newCode;
-      ttLogAction(`editou "${oldCode}" → "${newCode}"`);
       saveTheme(activeThemeId); notify(`Código atualizado → ${newCode}`);
     }
     renderProducts(); renderSidebar();
   }
-  function cancelEdit() { if (saved) return; saved = true; renderProducts(); }
   input.addEventListener('blur', saveEdit);
-  input.addEventListener('keydown', e => { if (e.key==='Enter') { e.preventDefault(); input.blur(); } if (e.key==='Escape') { e.preventDefault(); cancelEdit(); } });
+  input.addEventListener('keydown', e => {
+    if (e.key==='Enter') { e.preventDefault(); input.blur(); }
+    if (e.key==='Escape') { e.preventDefault(); saved = true; renderProducts(); }
+  });
   input.addEventListener('mousedown', e => e.stopPropagation());
 }
 
@@ -975,24 +891,22 @@ function updateStats() {
   document.getElementById('statsBox').innerHTML = `Feitos: <span class="${pc}">${done}</span>/<span class="stat-accent">${total}</span> <span class="${pc}">(${pct}%)</span>`;
 }
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  ADD PRODUCT
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 document.getElementById('addBtn').addEventListener('click', () => {
   if (!activeThemeId) { notify('Seleciona um tema primeiro!', true); return; }
   const inp = document.getElementById('newProduct'), val = inp.value.trim().toUpperCase();
   if (!val) return;
   if (themes[activeThemeId].products.some(p => p.code===val)) { notify(`"${val}" já existe!`, true); inp.select(); return; }
-  pushUndo();
-  themes[activeThemeId].products.unshift({ code: val, done: false });
-  ttLogAction(`adicionou o produto "${val}"`);
+  pushUndo(); themes[activeThemeId].products.unshift({ code: val, done: false });
   saveTheme(activeThemeId); inp.value = ''; renderProducts(); renderSidebar(); notify(`"${val}" adicionado`);
 });
 document.getElementById('newProduct').addEventListener('keypress', e => { if (e.key==='Enter') document.getElementById('addBtn').click(); });
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  BULK ADD
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 document.getElementById('bulkAddBtn').addEventListener('click', () => {
   if (!activeThemeId) { notify('Seleciona um tema primeiro!', true); return; }
   document.getElementById('bulkInput').value = ''; document.getElementById('bulkStatus').textContent = '';
@@ -1002,8 +916,7 @@ document.getElementById('bulkAddBtn').addEventListener('click', () => {
 document.getElementById('bulkInput').addEventListener('input', () => {
   const codes = parseBulkCodes(document.getElementById('bulkInput').value);
   const s = document.getElementById('bulkStatus');
-  if (codes.length > 0) { s.textContent = `${codes.length} código(s) detectados`; s.style.color = 'var(--accent)'; }
-  else s.textContent = '';
+  if (codes.length > 0) { s.textContent = `${codes.length} código(s) detectados`; s.style.color = 'var(--accent)'; } else s.textContent = '';
 });
 function parseBulkCodes(text) { return text.split(/[\n,;]+/).map(s=>s.trim().toUpperCase()).filter(s=>s.length>0); }
 document.getElementById('bulkClose').addEventListener('click', () => document.getElementById('bulkModal').classList.remove('open'));
@@ -1012,18 +925,16 @@ document.getElementById('bulkConfirm').addEventListener('click', () => {
   const codes = parseBulkCodes(document.getElementById('bulkInput').value);
   if (codes.length === 0) { document.getElementById('bulkStatus').textContent = 'Nenhum código válido.'; document.getElementById('bulkStatus').style.color = 'var(--red)'; return; }
   const existing = new Set(themes[activeThemeId].products.map(p=>p.code));
-  let added = 0, skipped = 0;
-  pushUndo();
+  let added = 0, skipped = 0; pushUndo();
   codes.forEach(code => { if (existing.has(code)) { skipped++; return; } themes[activeThemeId].products.unshift({code, done:false}); existing.add(code); added++; });
-  ttLogAction(`adicionou ${added} produto(s) em massa`);
   saveTheme(activeThemeId); document.getElementById('bulkModal').classList.remove('open');
   renderProducts(); renderSidebar();
   notify(`${added} adicionado(s)${skipped>0?' · '+skipped+' dup. ignorado(s)':''}`);
 });
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  DROPDOWN
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 const moreBtn = document.getElementById('moreBtn'), moreMenu = document.getElementById('moreMenu');
 moreBtn.addEventListener('click', e => { e.stopPropagation(); moreMenu.classList.toggle('open'); });
 document.addEventListener('click', e => { if (!moreMenu.contains(e.target) && e.target!==moreBtn) moreMenu.classList.remove('open'); });
@@ -1031,15 +942,14 @@ document.addEventListener('click', e => { if (!moreMenu.contains(e.target) && e.
 document.getElementById('clearAllBtn').addEventListener('click', () => { if (!activeThemeId) return; moreMenu.classList.remove('open'); document.getElementById('clearModal').classList.add('open'); });
 document.getElementById('clearCancel').addEventListener('click', () => document.getElementById('clearModal').classList.remove('open'));
 document.getElementById('clearConfirm').addEventListener('click', () => {
-  pushUndo(); ttLogAction('apagou todos os produtos');
-  themes[activeThemeId].products = [];
+  pushUndo(); themes[activeThemeId].products = [];
   saveTheme(activeThemeId); document.getElementById('clearModal').classList.remove('open');
   renderProducts(); renderSidebar(); notify('Todos os produtos removidos');
 });
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  UNDO / REDO
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 function pushUndo() {
   if (!activeThemeId) return;
   undoHistory.push(JSON.stringify(themes[activeThemeId].products));
@@ -1056,22 +966,22 @@ document.addEventListener('keydown', e => {
   if (e.key==='Escape'){document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));moreMenu.classList.remove('open');}
 });
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  AUTO MARK
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 document.getElementById('autoToggle').addEventListener('click', () => { autoMark=!autoMark; localStorage.setItem(LS_AUTO,JSON.stringify(autoMark)); updateAutoToggle(); });
 function updateAutoToggle() { document.getElementById('autoToggle').classList.toggle('on', autoMark); }
 
-// ════════════════════════════════════════════════════════
-//  JSONBIN CONFIG
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
+//  JSONBIN
+// ════════════════════════════════════════
 const JSONBIN_KEY = '$2a$10$oOmEv.dZBvRCDigMzUr6w.Jf1LwKsD/ZYKG1jEzdV4EFgIr3uja.O';
 const JSONBIN_URL = 'https://api.jsonbin.io/v3/b';
 const JSONBIN_COLLECTION = '69b1676bc3097a1dd517aa4f';
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  SHARE
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 document.getElementById('shareBtn').addEventListener('click', async () => {
   if (!activeThemeId) { notify('Seleciona um tema primeiro!', true); return; }
   const statusEl = document.getElementById('shareStatus'), idBox = document.getElementById('shareIdBox');
@@ -1081,8 +991,7 @@ document.getElementById('shareBtn').addEventListener('click', async () => {
   try {
     const res = await fetch(JSONBIN_URL, { method:'POST', headers:{'Content-Type':'application/json','X-Master-Key':JSONBIN_KEY,'X-Bin-Private':'false','X-Bin-Name':theme.name,'X-Collection-Id':JSONBIN_COLLECTION}, body:JSON.stringify({name:theme.name,products:theme.products}) });
     if (!res.ok) throw new Error('Erro: '+res.status);
-    const data = await res.json();
-    idBox.textContent = data.metadata.id;
+    const data = await res.json(); idBox.textContent = data.metadata.id;
   } catch(e) { idBox.textContent = '❌ Erro ao gerar ID'; statusEl.textContent = e.message; statusEl.style.color='var(--red)'; }
 });
 document.getElementById('shareIdBox').addEventListener('click', () => {
@@ -1092,9 +1001,9 @@ document.getElementById('shareIdBox').addEventListener('click', () => {
 });
 document.getElementById('shareClose').addEventListener('click', () => document.getElementById('shareModal').classList.remove('open'));
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  IMPORT
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 document.getElementById('importBtn').addEventListener('click', () => { document.getElementById('importIdInput').value=''; document.getElementById('importStatus').textContent=''; document.getElementById('importModal').classList.add('open'); setTimeout(()=>document.getElementById('importIdInput').focus(),50); });
 document.getElementById('importClose').addEventListener('click', () => document.getElementById('importModal').classList.remove('open'));
 document.getElementById('importConfirm').addEventListener('click', async () => {
@@ -1110,26 +1019,24 @@ document.getElementById('importConfirm').addEventListener('click', async () => {
     const prods = data.products.map(p=>({code:p.code,done:false}));
     const exists = Object.values(themes).some(t=>t.name===data.name);
     const newName = exists ? data.name+' (importado)' : data.name;
-    const newId = genId();
-    themes[newId] = {name:newName,products:prods};
+    const newId = genId(); themes[newId] = {name:newName,products:prods};
     saveTheme(newId); renderSidebar(); selectTheme(newId);
-    document.getElementById('importModal').classList.remove('open');
-    notify('Tema importado: '+newName);
+    document.getElementById('importModal').classList.remove('open'); notify('Tema importado: '+newName);
   } catch(e) { statusEl.style.color='var(--red)'; statusEl.textContent='❌ '+e.message; }
 });
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  MOBILE
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 document.getElementById('menu-toggle').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
 document.addEventListener('click', e => {
   const sidebar = document.getElementById('sidebar'), toggle = document.getElementById('menu-toggle');
   if (sidebar.classList.contains('open')&&!sidebar.contains(e.target)&&e.target!==toggle) sidebar.classList.remove('open');
 });
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  NOTIFY
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 let notifTimer = null;
 function notify(msg, isError=false) {
   const n = document.getElementById('notif');
@@ -1138,9 +1045,9 @@ function notify(msg, isError=false) {
   notifTimer = setTimeout(() => n.classList.remove('show'), 2800);
 }
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  TOOLTIP
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 const tooltipEl = document.getElementById('tooltip');
 let tipTimer = null;
 document.addEventListener('mouseover', e => {
@@ -1154,18 +1061,20 @@ document.addEventListener('mouseover', e => {
 document.addEventListener('mouseout', e => { const t = e.target.closest('[data-tip]'); if (!t) return; clearTimeout(tipTimer); tooltipEl.classList.remove('visible'); });
 document.addEventListener('mousemove', e => { if (tooltipEl.classList.contains('visible')) { tooltipEl.style.left=(e.clientX+12)+'px'; tooltipEl.style.top=(e.clientY-30)+'px'; } });
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  CREATE LINK
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 const BASE_LINK_URL = 'https://www.novoatalho.pt/listproducts/';
 let linkFilterMode = 'all';
 function getProductsForLink() {
   if (!activeThemeId) return [];
   const prods = themes[activeThemeId].products;
-  if (linkFilterMode==='all') return prods;
-  if (linkFilterMode==='done') return prods.filter(p=>p.done);
-  if (linkFilterMode==='pending') return prods.filter(p=>!p.done);
-  if (linkFilterMode==='date') {
+	  if (linkFilterMode==='all') return prods;
+	  if (linkFilterMode==='done') return prods.filter(p=>p.done);
+	  if (linkFilterMode==='pending') return prods.filter(p=>!p.done);
+	  if (linkFilterMode==='correct') return prods.filter(p=>p.option==='correct');
+	  if (linkFilterMode==='wrong') return prods.filter(p=>p.option==='wrong');
+	  if (linkFilterMode==='date') {
     const dateVal = document.getElementById('linkDateInput').value; if (!dateVal) return [];
     return prods.filter(p=>{if(!p.done||!p.doneAt)return false;const d=new Date(p.doneAt);const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;return key===dateVal;});
   }
@@ -1180,8 +1089,8 @@ function updateLinkPreview() {
   const rawName=document.getElementById('linkNameInput').value.trim(),hint=document.getElementById('linkNameHint'),preview=document.getElementById('linkPreview'),copyBtn=document.getElementById('createLinkCopy'),status=document.getElementById('linkCopyStatus');
   status.textContent='';
   if (!rawName){hint.textContent='';preview.classList.remove('visible');copyBtn.style.display='none';return;}
-  const clean=rawName.replace(/[^a-zA-Z0-9\-]/g,'');
-  if (clean!==rawName){hint.textContent='⚠ Só letras, números e hífens.';hint.style.color='var(--red)';preview.classList.remove('visible');copyBtn.style.display='none';return;}
+  const clean=rawName.replace(/[^a-zA-Z0-9\-\s]/g,'');
+  if (clean!==rawName){hint.textContent='⚠ Só letras, números, hífens e espaços.';hint.style.color='var(--red)';preview.classList.remove('visible');copyBtn.style.display='none';return;}
   const prods=getProductsForLink();
   if (prods.length===0){hint.textContent='Nenhum produto para incluir.';hint.style.color='var(--red)';preview.classList.remove('visible');copyBtn.style.display='none';return;}
   hint.textContent=`✓ Link válido — ${prods.length} produto(s)`;hint.style.color='var(--green)';
@@ -1199,11 +1108,11 @@ document.getElementById('linkStep2Back').addEventListener('click',()=>{document.
 document.getElementById('linkNameInput').addEventListener('input',updateLinkPreview);
 document.getElementById('linkNameInput').addEventListener('keypress',e=>{if(e.key==='Enter')document.getElementById('createLinkCopy').click();});
 document.getElementById('linkPreview').addEventListener('click',()=>document.getElementById('createLinkCopy').click());
-document.getElementById('createLinkCopy').addEventListener('click',()=>{const name=document.getElementById('linkNameInput').value.trim();if(!name||!activeThemeId)return;const prods=getProductsForLink();const link=BASE_LINK_URL+encodeURIComponent(name)+'/'+prods.map(p=>encodeURIComponent(p.code)).join(';');navigator.clipboard.writeText(link).then(()=>{document.getElementById('linkCopyStatus').textContent='✓ Link copiado!';document.getElementById('linkCopyStatus').style.color='var(--green)';notify('Link copiado!');}).catch(()=>{document.getElementById('linkCopyStatus').textContent='❌ Erro ao copiar.';document.getElementById('linkCopyStatus').style.color='var(--red)';});});
+document.getElementById('createLinkCopy').addEventListener('click',()=>{const name=document.getElementById('linkNameInput').value.trim();if(!name||!activeThemeId)return;const prods=getProductsForLink();const link=BASE_LINK_URL+name.replace(/ /g, '%20')+'/'+prods.map(p=>encodeURIComponent(p.code)).join(';');navigator.clipboard.writeText(link).then(()=>{document.getElementById('linkCopyStatus').textContent='✓ Link copiado!';document.getElementById('linkCopyStatus').style.color='var(--green)';notify('Link copiado!');}).catch(()=>{document.getElementById('linkCopyStatus').textContent='❌ Erro ao copiar.';document.getElementById('linkCopyStatus').style.color='var(--red)';});});
 
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  SETTINGS
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 const LS_SETTINGS = 'app_settings_v1';
 let appSettings = { lightMode:false, accentColor:'#fd7e14', accentColor2:'#ff9a45', fontSize:100, btnSize:'normal', lang:'pt', status:'online' };
 const TRANSLATIONS = {
@@ -1216,18 +1125,18 @@ function applySettings(save=true){
   const root=document.documentElement;
   document.body.classList.toggle('light',appSettings.lightMode);
   document.getElementById('lightModeToggle').classList.toggle('on',appSettings.lightMode);
-  root.style.setProperty('--accent',appSettings.accentColor);root.style.setProperty('--accent2',appSettings.accentColor2);
+  root.style.setProperty('--accent',appSettings.accentColor); root.style.setProperty('--accent2',appSettings.accentColor2);
   const hex=appSettings.accentColor,r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
   root.style.setProperty('--accent-dim',`rgba(${r},${g},${b},0.12)`);
   root.style.setProperty('--font-scale',appSettings.fontSize/100);
   document.querySelectorAll('.product-code').forEach(el=>el.style.fontSize=(0.86*appSettings.fontSize/100)+'rem');
-  document.getElementById('fontSlider').value=appSettings.fontSize;document.getElementById('fontSliderVal').textContent=appSettings.fontSize+'%';
+  document.getElementById('fontSlider').value=appSettings.fontSize; document.getElementById('fontSliderVal').textContent=appSettings.fontSize+'%';
   const btnSizes={compact:{v:'4px',h:'8px',f:'0.68rem'},normal:{v:'7px',h:'13px',f:'0.75rem'},large:{v:'10px',h:'18px',f:'0.82rem'}};
   const bs=btnSizes[appSettings.btnSize]||btnSizes.normal;
-  root.style.setProperty('--btn-pad-v',bs.v);root.style.setProperty('--btn-pad-h',bs.h);root.style.setProperty('--btn-font',bs.f);
+  root.style.setProperty('--btn-pad-v',bs.v); root.style.setProperty('--btn-pad-h',bs.h); root.style.setProperty('--btn-font',bs.f);
   document.querySelectorAll('[data-btnsize]').forEach(el=>el.classList.toggle('active',el.dataset.btnsize===appSettings.btnSize));
   document.querySelectorAll('.color-swatch').forEach(sw=>sw.classList.toggle('active',sw.dataset.color===appSettings.accentColor));
-  applyLang();document.querySelectorAll('[data-lang]').forEach(el=>el.classList.toggle('active',el.dataset.lang===appSettings.lang));
+  applyLang(); document.querySelectorAll('[data-lang]').forEach(el=>el.classList.toggle('active',el.dataset.lang===appSettings.lang));
   updateStatusBadge();
   document.getElementById('statusOnlineBtn').classList.toggle('active',appSettings.status==='online');
   document.getElementById('statusBusyBtn').classList.toggle('active',appSettings.status==='busy');
@@ -1244,11 +1153,85 @@ document.querySelectorAll('[data-btnsize]').forEach(btn=>btn.addEventListener('c
 document.querySelectorAll('[data-lang]').forEach(btn=>btn.addEventListener('click',()=>{appSettings.lang=btn.dataset.lang;applySettings();}));
 document.getElementById('statusOnlineBtn').addEventListener('click',()=>{appSettings.status='online';applySettings();});
 document.getElementById('statusBusyBtn').addEventListener('click',()=>{appSettings.status='busy';applySettings();});
-document.getElementById('statusBadge').addEventListener('click',()=>{appSettings.status=appSettings.status==='online'?'busy':'online';applySettings();if(ttSession)ttSession.isOnline=appSettings.status==='online';updateTTBars();});
+	document.getElementById('statusBadge').addEventListener('click',()=>{appSettings.status=appSettings.status==='online'?'busy':'online';applySettings();});
+	
+	// ════════════════════════════════════════
+	//  ASSISTANT LOGIC
+	// ════════════════════════════════════════
+	const assistantBtn = document.getElementById('assistant-btn');
+	const assistantPanel = document.getElementById('assistant-panel');
+	const assistantClose = document.getElementById('assistant-close');
+	const assistantInput = document.getElementById('assistant-input');
+	const assistantSend = document.getElementById('assistant-send');
+	const assistantChat = document.getElementById('assistant-chat');
 
-// ════════════════════════════════════════════════════════
-//  EXPORT EXCEL
-// ════════════════════════════════════════════════════════
+	assistantBtn.addEventListener('click', () => assistantPanel.classList.toggle('open'));
+	assistantClose.addEventListener('click', () => assistantPanel.classList.remove('open'));
+
+	async function askAssistant() {
+	  const text = assistantInput.value.trim();
+	  if (!text) return;
+	  
+	  // Add user message
+	  const userMsg = document.createElement('div');
+	  userMsg.className = 'chat-msg user';
+	  userMsg.textContent = text;
+	  assistantChat.appendChild(userMsg);
+	  assistantInput.value = '';
+	  assistantChat.scrollTop = assistantChat.scrollHeight;
+
+	  // Add loading message
+	  const aiMsg = document.createElement('div');
+	  aiMsg.className = 'chat-msg ai';
+	  aiMsg.textContent = '...';
+	  assistantChat.appendChild(aiMsg);
+
+	  try {
+	    const context = Object.values(themes).map(t => ({
+	      tema: t.name,
+	      tipo: t.type || 'padrão',
+	      produtos: t.products.map(p => ({
+	        codigo: p.code,
+	        estado: p.done ? 'concluído' : 'pendente',
+	        opcao: p.option || 'nenhuma'
+	      }))
+	    }));
+
+	    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+	      method: 'POST',
+	      headers: {
+	        'Content-Type': 'application/json',
+	        'Authorization': 'Bearer sk-rOhnuMMRUHNHgJg9O5iXlGEiLo9GVaJifQFET4pBMl3USqL47xUPSy1qh2MtGXNn39YiVJEVEnTDgBoY9-UaWwvl-yIS'
+	      },
+	      body: JSON.stringify({
+	        model: 'gpt-4o-mini',
+	        messages: [
+	          { role: 'system', content: 'És um assistente útil para um gestor de produtos da loja Novo Atalho. Tens acesso aos dados atuais do site: ' + JSON.stringify(context) + '. Responde de forma curta e profissional em Português.' },
+	          { role: 'user', content: text }
+	        ],
+	        temperature: 0.7
+	      })
+	    });
+
+	    const data = await response.json();
+	    if (data.choices && data.choices[0]) {
+	      aiMsg.textContent = data.choices[0].message.content;
+	    } else {
+	      throw new Error('Resposta inválida da API');
+	    }
+	    assistantChat.scrollTop = assistantChat.scrollHeight;
+
+	  } catch (e) {
+	    aiMsg.textContent = "Erro ao ligar ao assistente: " + e.message;
+	  }
+	}
+
+	assistantSend.addEventListener('click', askAssistant);
+	assistantInput.addEventListener('keypress', e => { if (e.key === 'Enter') askAssistant(); });
+	
+	// ════════════════════════════════════════
+	//  EXPORT EXCEL
+	// ════════════════════════════════════════
 document.getElementById('exportCsvBtn').addEventListener('click',()=>{
   if(!activeThemeId){notify('Seleciona um tema primeiro!',true);return;}
   const theme=themes[activeThemeId],products=theme.products,now=new Date(),dateStr=now.toLocaleDateString('pt-PT'),timeStr=now.toLocaleTimeString('pt-PT',{hour:'2-digit',minute:'2-digit'});
@@ -1281,410 +1264,14 @@ document.getElementById('exportCsvBtn').addEventListener('click',()=>{
   notify(`Excel exportado: ${theme.name}`);
 });
 
-// ════════════════════════════════════════════════════════
-//  ████████╗███████╗ █████╗ ███╗   ███╗████████╗███████╗███╗   ███╗ █████╗
-//     ██╔══╝██╔════╝██╔══██╗████╗ ████║╚══██╔══╝██╔════╝████╗ ████║██╔══██╗
-//     ██║   █████╗  ███████║██╔████╔██║   ██║   █████╗  ██╔████╔██║███████║
-//     ██║   ██╔══╝  ██╔══██║██║╚██╔╝██║   ██║   ██╔══╝  ██║╚██╔╝██║██╔══██║
-//     ██║   ███████╗██║  ██║██║ ╚═╝ ██║   ██║   ███████╗██║ ╚═╝ ██║██║  ██║
-//     ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝   ╚═╝   ╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝
-// ════════════════════════════════════════════════════════
-// TeamTema session structure:
-// { binId, roomName, userName, userColor, password, isOnline, themeId }
-
-let ttSession = null;
-let ttPollInterval = null;
-const TT_COLORS = ['#10b981','#3b82f6','#f59e0b','#ec4899','#8b5cf6','#06b6d4','#ef4444','#84cc16'];
-
-function ttColor(name) {
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  return TT_COLORS[Math.abs(hash) % TT_COLORS.length];
-}
-
-function ttTimeStr(ts) {
-  const d = new Date(ts);
-  return d.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' });
-}
-
-// Load saved TT session
-function loadTTSession() {
-  try {
-    const s = JSON.parse(localStorage.getItem(LS_TT));
-    if (s && s.binId) { ttSession = s; }
-  } catch(e) {}
-}
-
-function saveTTSession() {
-  if (ttSession) localStorage.setItem(LS_TT, JSON.stringify(ttSession));
-  else localStorage.removeItem(LS_TT);
-}
-
-// ── Log an action to the activity console (only when online + in a TT room) ──
-async function ttLogAction(action) {
-  if (!ttSession || !ttSession.isOnline) return;
-  // Fetch current bin data
-  try {
-    const res = await fetch(`${JSONBIN_URL}/${ttSession.binId}/latest`, { headers: { 'X-Master-Key': JSONBIN_KEY } });
-    if (!res.ok) return;
-    const json = await res.json();
-    const data = json.record;
-    // Add activity entry
-    const entry = {
-      user: ttSession.userName,
-      color: ttSession.userColor,
-      action,
-      ts: Date.now()
-    };
-    if (!data.activity) data.activity = [];
-    data.activity.unshift(entry);
-    if (data.activity.length > 60) data.activity = data.activity.slice(0, 60);
-    // Update member online status
-    if (!data.members) data.members = [];
-    const mi = data.members.findIndex(m => m.name === ttSession.userName);
-    if (mi !== -1) data.members[mi].online = true;
-    // Push updated bin
-    await fetch(`${JSONBIN_URL}/${ttSession.binId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
-      body: JSON.stringify(data)
-    });
-  } catch(e) {}
-}
-
-// ── Push heartbeat (online presence) ──
-async function ttHeartbeat() {
-  if (!ttSession) return;
-  try {
-    const res = await fetch(`${JSONBIN_URL}/${ttSession.binId}/latest`, { headers: { 'X-Master-Key': JSONBIN_KEY } });
-    if (!res.ok) return;
-    const json = await res.json();
-    const data = json.record;
-    if (!data.members) data.members = [];
-    const mi = data.members.findIndex(m => m.name === ttSession.userName);
-    const memberData = { name: ttSession.userName, color: ttSession.userColor, online: ttSession.isOnline, lastSeen: Date.now() };
-    if (mi !== -1) data.members[mi] = memberData;
-    else data.members.push(memberData);
-    // Clean stale members (offline after 30s of no heartbeat)
-    data.members = data.members.map(m => {
-      if (m.name !== ttSession.userName && (Date.now() - m.lastSeen) > 30000) return {...m, online: false};
-      return m;
-    });
-    await fetch(`${JSONBIN_URL}/${ttSession.binId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
-      body: JSON.stringify(data)
-    });
-    renderTTOnlineBar(data.members);
-    renderTTConsole(data.activity || []);
-  } catch(e) {}
-}
-
-// ── Poll for updates (members + activity) ──
-function startTTPolling() {
-  stopTTPolling();
-  ttHeartbeat(); // immediate
-  ttPollInterval = setInterval(ttHeartbeat, 8000);
-}
-function stopTTPolling() {
-  if (ttPollInterval) { clearInterval(ttPollInterval); ttPollInterval = null; }
-}
-
-// ── Render Online Bar ──
-function renderTTOnlineBar(members) {
-  const membersEl = document.getElementById('onlineMembers');
-  membersEl.innerHTML = '';
-  (members || []).forEach(m => {
-    const div = document.createElement('div');
-    div.className = 'online-member ' + (m.online ? 'is-online' : 'is-offline');
-    div.innerHTML = `<div class="member-dot" style="background:${m.color||'#10b981'}"></div>${esc(m.name)}`;
-    membersEl.appendChild(div);
-  });
-}
-
-// ── Render Activity Console ──
-function renderTTConsole(activity) {
-  const entries = document.getElementById('activityEntries');
-  const count = document.getElementById('consoleCount');
-  count.textContent = `${activity.length} ação${activity.length!==1?'ões':''}`;
-  if (!activity || activity.length === 0) {
-    entries.innerHTML = '<div class="console-empty">Nenhuma ação ainda. Começa a trabalhar!</div>';
-    return;
-  }
-  entries.innerHTML = activity.slice(0, 30).map(e => `
-    <div class="activity-entry">
-      <div class="activity-dot" style="background:${e.color||'#10b981'}"></div>
-      <div class="activity-user" style="color:${e.color||'#10b981'}">${esc(e.user)}</div>
-      <div class="activity-action">${esc(e.action)}</div>
-      <div class="activity-time">${ttTimeStr(e.ts)}</div>
-    </div>`).join('');
-}
-
-// ── Update UI when TT state changes ──
-function updateTTBars() {
-  const bar = document.getElementById('onlineBar');
-  const offBanner = document.getElementById('ttOfflineBanner');
-  const console_ = document.getElementById('activityConsole');
-  if (!ttSession) {
-    bar.classList.remove('visible');
-    offBanner.classList.remove('visible');
-    console_.classList.remove('visible');
-    return;
-  }
-  bar.classList.add('visible');
-  console_.classList.add('visible');
-  document.getElementById('ttRoomName').textContent = '· ' + ttSession.roomName;
-  if (ttSession.isOnline) {
-    offBanner.classList.remove('visible');
-  } else {
-    offBanner.classList.add('visible');
-  }
-  renderSidebar();
-}
-
-// ── Join a room (sets up session) ──
-async function joinTTRoom(binId, userName, password, roomName) {
-  const res = await fetch(`${JSONBIN_URL}/${binId}/latest`, { headers: { 'X-Master-Key': JSONBIN_KEY } });
-  if (!res.ok) throw new Error('Sala não encontrada. Verifica o ID.');
-  const json = await res.json();
-  const data = json.record;
-  if (!data.ttRoom) throw new Error('Este ID não é uma sala de TeamTema.');
-  if (data.password !== password) throw new Error('Senha incorreta.');
-  const color = ttColor(userName);
-  ttSession = { binId, roomName: data.roomName || roomName, userName, userColor: color, password, isOnline: true, themeId: activeThemeId };
-  saveTTSession();
-  startTTPolling();
-  updateTTBars();
-  // Log joining
-  await ttLogAction('entrou na sala');
-  return data;
-}
-
-// ── Create a room ──
-async function createTTRoom(roomName, userName, password) {
-  const color = ttColor(userName);
-  const payload = {
-    ttRoom: true,
-    roomName,
-    password,
-    members: [{ name: userName, color, online: true, lastSeen: Date.now() }],
-    activity: [{ user: userName, color, action: 'criou a sala', ts: Date.now() }]
-  };
-  const res = await fetch(JSONBIN_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY, 'X-Bin-Private': 'false', 'X-Bin-Name': 'TT_'+roomName },
-    body: JSON.stringify(payload)
-  });
-  if (!res.ok) throw new Error('Erro ao criar sala: ' + res.status);
-  const data = await res.json();
-  const binId = data.metadata.id;
-  ttSession = { binId, roomName, userName, userColor: color, password, isOnline: true, themeId: activeThemeId };
-  saveTTSession();
-  return binId;
-}
-
-// ── Leave TT room ──
-async function leaveTTRoom() {
-  if (!ttSession) return;
-  // Mark as offline
-  try {
-    const res = await fetch(`${JSONBIN_URL}/${ttSession.binId}/latest`, { headers: { 'X-Master-Key': JSONBIN_KEY } });
-    if (res.ok) {
-      const json = await res.json(); const data = json.record;
-      if (data.members) { const mi = data.members.findIndex(m=>m.name===ttSession.userName); if (mi!==-1) data.members[mi].online=false; }
-      if (!data.activity) data.activity=[];
-      data.activity.unshift({user:ttSession.userName,color:ttSession.userColor,action:'saiu da sala',ts:Date.now()});
-      await fetch(`${JSONBIN_URL}/${ttSession.binId}`, {method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':JSONBIN_KEY},body:JSON.stringify(data)});
-    }
-  } catch(e) {}
-  stopTTPolling();
-  ttSession = null;
-  saveTTSession();
-  updateTTBars();
-  renderSidebar();
-  notify('Saíste do TeamTema');
-}
-
-function copyTTId() {
-  if (!ttSession) return;
-  navigator.clipboard.writeText(ttSession.binId).then(() => {
-    document.getElementById('ttManageId').textContent = '✓ copiado!';
-    setTimeout(()=>{ if (document.getElementById('ttManageId')) document.getElementById('ttManageId').textContent = 'clica para copiar'; }, 1500);
-    notify('ID da sala copiado!');
-  });
-}
-
-// ── Console toggle ──
-document.getElementById('activityConsoleHeader').addEventListener('click', () => {
-  const entries = document.getElementById('activityEntries');
-  const btn = document.getElementById('consoleToggle');
-  entries.classList.toggle('collapsed');
-  btn.textContent = entries.classList.contains('collapsed') ? '▲' : '▼';
-});
-
-// ── TT Online Toggle (in manage step) ──
-document.getElementById('ttOnlineToggle').addEventListener('click', () => {
-  if (!ttSession) return;
-  ttSession.isOnline = !ttSession.isOnline;
-  document.getElementById('ttOnlineToggle').classList.toggle('on', ttSession.isOnline);
-  saveTTSession();
-  updateTTBars();
-  if (ttSession.isOnline) { startTTPolling(); notify('TeamTema: estás online ✓'); }
-  else { notify('TeamTema: estás offline'); }
-});
-
-document.getElementById('ttGoOnlineBtn').addEventListener('click', () => {
-  if (!ttSession) return;
-  ttSession.isOnline = true;
-  saveTTSession();
-  updateTTBars();
-  startTTPolling();
-  notify('TeamTema: estás online ✓');
-});
-
-// ── Leave button (online bar) ──
-document.getElementById('ttLeaveBtn').addEventListener('click', () => leaveTTRoom());
-
-// ═══════════════════════════════════════
-//  TT MODAL FLOW
-// ═══════════════════════════════════════
-function showTTStep(step) {
-  ['choice','create','created','join','manage'].forEach(s => {
-    document.getElementById('ttStep-'+s).style.display = s===step ? 'block' : 'none';
-  });
-}
-
-document.getElementById('ttBtn').addEventListener('click', () => {
-  if (ttSession) {
-    // Show manage step
-    document.getElementById('ttManageRoomName').textContent = ttSession.roomName;
-    document.getElementById('ttManageUser').textContent = ttSession.userName;
-    document.getElementById('ttManageId').textContent = 'clica para copiar';
-    document.getElementById('ttManageId').title = ttSession.binId;
-    document.getElementById('ttOnlineToggle').classList.toggle('on', ttSession.isOnline);
-    showTTStep('manage');
-  } else {
-    showTTStep('choice');
-  }
-  document.getElementById('ttModal').classList.add('open');
-  document.getElementById('sidebar').classList.remove('open');
-});
-
-document.getElementById('ttChoiceClose').addEventListener('click', () => document.getElementById('ttModal').classList.remove('open'));
-document.getElementById('ttManageClose').addEventListener('click', () => document.getElementById('ttModal').classList.remove('open'));
-
-document.getElementById('ttCreateBtn').addEventListener('click', () => {
-  document.getElementById('ttCreateName').value = '';
-  document.getElementById('ttCreateUser').value = '';
-  document.getElementById('ttCreatePass1').value = '';
-  document.getElementById('ttCreatePass2').value = '';
-  document.getElementById('ttCreatePassHint').textContent = '';
-  showTTStep('create');
-  setTimeout(() => document.getElementById('ttCreateName').focus(), 50);
-});
-
-document.getElementById('ttCreateBack').addEventListener('click', () => showTTStep('choice'));
-document.getElementById('ttJoinBack').addEventListener('click', () => showTTStep('choice'));
-
-document.getElementById('ttCreatePass2').addEventListener('input', () => {
-  const p1 = document.getElementById('ttCreatePass1').value;
-  const p2 = document.getElementById('ttCreatePass2').value;
-  const hint = document.getElementById('ttCreatePassHint');
-  if (!p2) { hint.textContent = ''; return; }
-  if (p1 === p2) { hint.textContent = '✓ Senhas coincidem'; hint.style.color = '#10b981'; }
-  else { hint.textContent = '✕ As senhas não coincidem'; hint.style.color = 'var(--red)'; }
-});
-
-document.getElementById('ttCreateConfirm').addEventListener('click', async () => {
-  const name = document.getElementById('ttCreateName').value.trim();
-  const user = document.getElementById('ttCreateUser').value.trim();
-  const p1 = document.getElementById('ttCreatePass1').value;
-  const p2 = document.getElementById('ttCreatePass2').value;
-  const hint = document.getElementById('ttCreatePassHint');
-  if (!name || !user) { hint.textContent = 'Preenche todos os campos.'; hint.style.color = 'var(--red)'; return; }
-  if (!p1) { hint.textContent = 'Define uma senha.'; hint.style.color = 'var(--red)'; return; }
-  if (p1 !== p2) { hint.textContent = 'As senhas não coincidem.'; hint.style.color = 'var(--red)'; return; }
-  hint.textContent = '⏳ A criar sala...'; hint.style.color = 'var(--text2)';
-  document.getElementById('ttCreateConfirm').disabled = true;
-  try {
-    const binId = await createTTRoom(name, user, p1);
-    document.getElementById('ttCreatedIdValue').textContent = binId;
-    document.getElementById('ttCreatedStatus').textContent = '';
-    showTTStep('created');
-    startTTPolling();
-    updateTTBars();
-  } catch(e) {
-    hint.textContent = '❌ ' + e.message; hint.style.color = 'var(--red)';
-  }
-  document.getElementById('ttCreateConfirm').disabled = false;
-});
-
-document.getElementById('ttCreatedIdBox').addEventListener('click', () => {
-  const id = document.getElementById('ttCreatedIdValue').textContent;
-  if (id==='—') return;
-  navigator.clipboard.writeText(id).then(() => {
-    document.getElementById('ttCreatedStatus').textContent = '✓ ID copiado para a área de transferência!';
-  });
-});
-
-document.getElementById('ttCreatedDone').addEventListener('click', () => {
-  document.getElementById('ttModal').classList.remove('open');
-  notify('🤝 TeamTema ativo! Partilha o ID com a tua equipa.');
-  renderSidebar();
-});
-
-document.getElementById('ttJoinBtn').addEventListener('click', () => {
-  document.getElementById('ttJoinId').value = '';
-  document.getElementById('ttJoinUser').value = '';
-  document.getElementById('ttJoinPass').value = '';
-  document.getElementById('ttJoinStatus').textContent = '';
-  showTTStep('join');
-  setTimeout(() => document.getElementById('ttJoinId').focus(), 50);
-});
-
-document.getElementById('ttJoinConfirm').addEventListener('click', async () => {
-  const binId = document.getElementById('ttJoinId').value.trim();
-  const user = document.getElementById('ttJoinUser').value.trim();
-  const pass = document.getElementById('ttJoinPass').value;
-  const statusEl = document.getElementById('ttJoinStatus');
-  if (!binId || !user || !pass) { statusEl.textContent = 'Preenche todos os campos.'; statusEl.style.color='var(--red)'; return; }
-  statusEl.textContent = '⏳ A entrar na sala...'; statusEl.style.color='var(--text2)';
-  document.getElementById('ttJoinConfirm').disabled = true;
-  try {
-    await joinTTRoom(binId, user, pass, '');
-    document.getElementById('ttModal').classList.remove('open');
-    notify('🤝 Entraste no TeamTema: ' + ttSession.roomName);
-    renderSidebar();
-  } catch(e) {
-    statusEl.textContent = '❌ ' + e.message; statusEl.style.color='var(--red)';
-  }
-  document.getElementById('ttJoinConfirm').disabled = false;
-});
-
-document.getElementById('ttJoinPass').addEventListener('keypress', e => { if (e.key==='Enter') document.getElementById('ttJoinConfirm').click(); });
-
-document.getElementById('ttManageLeave').addEventListener('click', () => {
-  document.getElementById('ttModal').classList.remove('open');
-  leaveTTRoom();
-});
-
-document.getElementById('ttManageId').addEventListener('click', copyTTId);
-
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 //  INIT
-// ════════════════════════════════════════════════════════
+// ════════════════════════════════════════
 loadAll();
 loadSettings();
-loadTTSession();
 renderSidebar();
 const firstId = Object.keys(themes)[0];
 if (firstId) selectTheme(firstId);
-
-// Resume TT session if was active
-if (ttSession) {
-  updateTTBars();
-  startTTPolling();
-}
 </script>
 </body>
 </html>
