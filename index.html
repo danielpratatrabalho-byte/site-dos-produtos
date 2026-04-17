@@ -1227,15 +1227,20 @@ document.getElementById('statusOnlineBtn').addEventListener('click',()=>{appSett
 	    });
 
 	    const data = await response.json();
+	    if (data.error) {
+	      throw new Error(data.error.message || 'Erro na API da Groq');
+	    }
 	    if (data.choices && data.choices[0]) {
 	      aiMsg.textContent = data.choices[0].message.content;
 	    } else {
-	      throw new Error('Resposta inválida da API');
+	      console.error('Groq API Response:', data);
+	      throw new Error('Resposta vazia ou inválida da API');
 	    }
 	    assistantChat.scrollTop = assistantChat.scrollHeight;
 
 	  } catch (e) {
-	    aiMsg.textContent = "Erro ao ligar ao assistente: " + e.message;
+	    console.error('Assistant Error:', e);
+	    aiMsg.textContent = "Erro: " + e.message;
 	  }
 	}
 
