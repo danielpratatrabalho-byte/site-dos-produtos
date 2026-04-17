@@ -1223,16 +1223,23 @@ document.getElementById('statusOnlineBtn').addEventListener('click',()=>{appSett
 	      return `Tema "${t.name}": ${t.products.length} produtos (${done} feitos).`;
 	    }).join('\n');
 
-	    const systemPrompt = `És o Assistente da Novo Atalho. NÃO digas que não tens informações atuais.
-DADOS EM TEMPO REAL DO UTILIZADOR:
+	    const systemPrompt = `És o Assistente Especialista da Novo Atalho (https://www.novoatalho.pt/). 
+O teu objetivo é ajudar o utilizador a gerir produtos e responder a dúvidas sobre a loja.
+
+DADOS LOCAIS DO UTILIZADOR (O que ele está a gerir agora):
 ${contextSummary}
 ${specificProductInfo}
-LISTA DE TODOS OS CÓDIGOS DISPONÍVEIS: ${allCodes.slice(0, 200).join(', ')}${allCodes.length > 200 ? '...' : ''}
+CÓDIGOS NO SITE: ${allCodes.slice(0, 150).join(', ')}
+
+CONHECIMENTO DA LOJA NOVO ATALHO:
+- És um expert na Novo Atalho: sabes sobre hardware, informática, eletrodomésticos e a estrutura do site.
+- Se o utilizador perguntar sobre a loja, marcas (como Deerma, Xiaomi, etc.) ou categorias, usa o teu conhecimento especializado.
+- Se não souberes um preço exato atual da loja (pois os preços mudam), sugere verificar em novoatalho.pt mas dá uma estimativa ou info técnica se possível.
 
 INSTRUÇÕES:
-- Se o utilizador perguntar por um código da lista, confirma que ele existe.
-- Responde sempre em Português de forma curta e profissional.
-- Foca-te nos dados fornecidos acima.`;
+- Responde sempre em Português de forma prestável, curta e profissional.
+- Cruza os dados locais do utilizador com o teu conhecimento da loja.
+- NÃO digas que o teu conhecimento está desatualizado; age como se estivesses ligado ao ecossistema da Novo Atalho.`;
 
 	    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
 	      method: 'POST',
