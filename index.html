@@ -1200,15 +1200,16 @@ document.getElementById('statusOnlineBtn').addEventListener('click',()=>{appSett
 	      aiMsg.textContent = "Por favor, configura a tua Groq API Key nas definições (ícone da engrenagem).";
 	      return;
 	    }
-	    const context = Object.values(themes).map(t => ({
-	      tema: t.name,
-	      tipo: t.type || 'padrão',
-	      produtos: t.products.map(p => ({
-	        codigo: p.code,
-	        estado: p.done ? 'concluído' : 'pendente',
-	        opcao: p.option || 'nenhuma'
-	      }))
-	    }));
+	    // Otimização de contexto para evitar Rate Limit (TPM)
+	    const contextSummary = Object.values(themes).map(t => {
+	      const done = t.products.filter(p => p.done).length;
+	      const correct = t.products.filter(p => p.option === 'correct').length;
+	      const wrong = t.products.filter(p => p.option === 'wrong').length;
+	      // Envia apenas os primeiros 10 códigos para dar uma ideia do conteúdo sem estourar o limite
+	      const sampleCodes = t.products.slice(0, 10).map(p => p.code).join(', ');
+	      
+	      return `Tema: ${t.name} (${t.type || 'padrão'}). Total: ${t.products.length}, Feitos: ${done}, Corretos: ${correct}, Errados: ${wrong}. Exemplos: ${sampleCodes}`;
+	    }).join('\n');
 
 	    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
 	      method: 'POST',
@@ -1217,12 +1218,12 @@ document.getElementById('statusOnlineBtn').addEventListener('click',()=>{appSett
 	        'Authorization': 'Bearer ' + appSettings.groqKey
 	      },
 	      body: JSON.stringify({
-	        model: 'llama-3.3-70b-versatile',
+	        model: 'llama-3.1-8b-instant', // Modelo mais rápido e com limites maiores
 	        messages: [
-	          { role: 'system', content: 'És um assistente útil para um gestor de produtos da loja Novo Atalho. Tens acesso aos dados atuais do site: ' + JSON.stringify(context) + '. Responde de forma curta e profissional em Português.' },
+	          { role: 'system', content: 'És o assistente da Novo Atalho. Dados atuais:\n' + contextSummary + '\nResponde de forma curta e direta em Português.' },
 	          { role: 'user', content: text }
 	        ],
-	        temperature: 0.7
+	        temperature: 0.5
 	      })
 	    });
 
